@@ -1,0 +1,43 @@
+.accordion-ext{
+    @include createFlex(row,flex-start,flex-start,null);
+    background-color:$light-gray;
+    min-width: 100%;
+    &__left-content{
+        box-sizing: border-box;
+        min-width:30%;
+        padding:30px 40px;
+        h2{
+            font-weight:$f-bold;
+        }
+    }
+    &__group{
+        background-color: white;
+        min-width: 70%;
+    }
+    &__item{
+        box-sizing: border-box;
+        min-width: 100%;
+        box-shadow: 0px 0px 1px gray;
+        padding:20px;
+        ul{
+            list-style-type: circle;
+        }
+    }
+    &__heading{
+        cursor: pointer;
+        @include createFlex(row,space-between,center,null);
+        h2{
+            margin:0px;
+            font-weight: $f-reg;
+            font-size:pxToRem(20);
+        }
+    }
+    &__icon {
+        &.open{
+            display: block;
+        }
+        &.close{
+            display:none;
+        }
+    }
+}

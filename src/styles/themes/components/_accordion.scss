@@ -1,0 +1,33 @@
+.accordion{
+    padding-left: 25px;
+    background-color: $beige;
+    padding-bottom:20px;
+    position:relative;
+    top:0px;
+    left:0px;
+    &__heading{
+        cursor: pointer;
+        padding:0px 90px;
+        @include createFlex(row,space-between,center,null);
+        &-text{
+            position: relative;
+            top:0px;
+            left:0px;   
+      
+        }
+        #info-icon{
+            position: absolute;
+            top:33px;
+            left:-40px;
+        }
+    }
+    &__text{
+        overflow: hidden;
+        padding:0px 90px;
+        a{
+            margin-top: 20px;
+            display: block;
+            color:$sky-blue;
+        }
+    }
+}

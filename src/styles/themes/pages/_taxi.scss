@@ -1,0 +1,200 @@
+.accordion-ext{
+    min-width: 50%;
+    width:calc(100% - 140px);
+    margin:50px auto;
+    a{
+        color:$sky-blue;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    &__title{
+        color:black;
+    }
+}
+
+.taxi{
+    &__hero{
+        position:relative;
+        top:0px;
+        left:0px;
+        margin:0px;
+        padding:0px;
+        height:60vh;
+        padding:0px 70px;
+        background-image:url('/taxi-hero.webp');
+        background-size: cover;
+        @include createFlex(row,flex-start,center,null);
+        h1{
+            margin:0px;
+        }
+    }
+    &__overlay{
+        position:absolute;
+        top:0px;
+        left:0px;
+        width: 100%;
+        height:100%;
+        background-color: rgb(4, 4, 158);
+        opacity:0.5;
+    }
+    &__hero-text{
+        position: relative;
+        top:0px;
+        left:0px;
+        z-index: 2;
+        h1,h3{
+            color:white;
+            margin:5px 0px;
+        }
+    }
+    &__feature{
+        @include createFlex(row,space-between,center,null);
+        padding:15px 70px;
+        background-color: $form-bg
+    }
+    &__feature-item{
+        @include createFlex(row,space-between,flex-start,null);
+        h3,p{
+            margin:3px 0px;
+        }
+        h3{
+            font-size:pxToRem(18);
+        }
+        p{
+            color:$font-gray;
+        }
+        &:first-of-type{
+            .taxi__feature-logo{
+                background-color:$light-green;
+            }
+        }
+        &:nth-of-type(2){
+            .taxi__feature-logo{
+                background-color: $light-beige
+            }
+        }
+        &:last-of-type{
+            .taxi__feature-logo{
+                background:$very-light-blue;
+            }
+        }
+    }
+    &__feature-logo{
+        margin:0px 10px;
+        @include createFlex(row,center,center,null);
+        padding:18px;
+        border-radius:100%;
+    }
+    &__article{
+        padding:0px 70px;
+        h2{
+            text-align: center;
+            font-size:pxToRem(40);
+            font-weight:$f-reg;
+        }
+    }
+    &__article-main{
+        @include createFlex(row,space-between,flex-start,null);
+    }
+    &__article-list{
+        width:50%;
+    }
+    &__article-item{
+        margin:80px 0px;
+        @include createFlex(row,flex-start,center,null);
+        h3,p{
+            margin:0px;
+        }
+        h3{
+            margin-bottom:10px;
+            font-weight: $f-bold;
+        }
+        p{
+            color:$font-gray;
+        }
+        img{
+            margin:0px 15px;
+            width: 25%;
+        }
+    }
+    &__article-image{
+        width: 50%;
+        img{
+            display: block;
+            margin-left: auto;
+            width: 90%;
+        }
+        p{
+            margin-left:30px;
+            margin-top:-5px;
+        }
+    }
+    &__article-message{
+        position:relative;
+        top:0px;
+        left:40px;
+        z-index:2;
+        background-color:lightgray;
+        padding:10px;
+        border-radius:5px;
+        &:before{
+            content:'';
+            position:absolute;  
+            top:35px;
+            left:15px;
+            z-index: 2;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid lightgray;
+        }
+    }
+    &__tabs{
+        background-color: $form-bg;
+        padding:30px 70px;
+        &>h2{
+            text-align: center;
+        }
+    }
+    &__tabs-nav{
+        ul{
+            margin:0px;
+            padding:0px;
+            list-style-type: none;
+            @include createFlex(row,flex-start,center,null);
+            li{
+                cursor: pointer;
+                padding:10px 15px;
+                background-color:#fff;
+                border:1px solid $sky-blue;
+                color:$sky-blue;
+                &:first-of-type{
+                    border-top-left-radius: 3px;
+                    border-bottom-left-radius: 3px;
+                }
+                &:last-of-type{
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+                &.active{
+                    background-color: $sky-blue;
+                    color:white;
+                }
+            }
+        }
+    }
+    &__tab,
+    &__tab-content-top,
+    &__tab-content-bottom{
+        @include createFlex(row,space-between,flex-start,wrap);
+    }
+    &__tab-content-top,
+    &__tab-content-bottom{
+        min-width: 100%;
+    }
+    &__tab{
+        display: none;
+        &:first-of-type{
+            display: flex;
+        }
+    }
+}

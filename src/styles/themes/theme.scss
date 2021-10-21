@@ -1,0 +1,34 @@
+/*----------------------GLOBAL--------------------------*/
+@import '../normalize';
+@import '../mixins';
+@import '../variables';
+@import '../fonts';
+@import '../animations';
+@import '../global';
+/*----------------------COMPONENTS----------------------*/
+@import './components/nav';
+@import './components/navSlider';
+@import './components/accordion';
+@import './components/accordionExtendend';
+@import './components/search';
+@import './components/jumbotron';
+@import './components/flightSearch';
+@import './components/rentalsSearch';
+@import './components/attractionsSearch';
+@import './components/alert';
+@import './components/tab';
+@import './components/taxiSearch';
+@import './components/rentalCard';
+@import './components/subscribeAlert';
+@import './components/normalAlert';
+@import './components/subscribeForm';
+@import './components/hotelsCarousel';
+@import './components/propertyList';
+@import './components/homeTabs';
+@import './components/footer';
+/*----------------------PAGES---------------------------*/
+@import './pages/home';
+@import './pages/flights';
+@import './pages/car-rentals';
+@import './pages/attractions';
+@import './pages/taxi';

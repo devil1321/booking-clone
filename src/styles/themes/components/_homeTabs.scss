@@ -1,0 +1,48 @@
+.home-tabs{
+    padding:0px 80px;
+    @include breakpoint-down(medium){
+        padding:0px 20px;
+    }
+    &__group-t{
+        cursor: pointer;
+        width: 100%;
+        @include createFlex(row,flex-start,center,null);
+        border-bottom: 1px solid $sky-blue;
+    }
+    &__title{
+        padding:10px 20px;
+        background-color: rgb(237, 237, 237);
+        color:gray;
+        &.active{
+            color:white;
+            background-color: $sky-blue;
+        }
+    }
+    &__group{
+        overflow-x: hidden;
+        max-width: 100%;
+        padding:20px 0px;
+        @include createFlex(row,flex-start,center,null);
+        a{
+            margin-right:15px;
+            line-height: 1.5;
+            text-decoration: none;
+            color:$sky-blue;
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+    }
+    [class^="home-table"]{
+        min-width: 100%;
+        animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+}

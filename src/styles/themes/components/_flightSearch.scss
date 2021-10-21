@@ -1,0 +1,443 @@
+.flight-s {
+    &__header {
+        @include createFlex(row, flex-start, center, null);
+    }
+    &__radio,
+    &__select {
+        cursor: pointer;
+        margin-right: 30px;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        input {
+            margin-right: 5px;
+        }
+        svg {
+            margin-left: 5px;
+        }
+    }
+    &__radio {
+        @include breakpoint-down(small) {
+            min-width: 100px;
+            margin-right: 15px;
+        }
+    }
+    &__select {
+        @include breakpoint-down(small) {
+            display: none;
+        }
+    }
+    &__menu-economy {
+        padding: 0px 20px;
+        position: absolute;
+        top: 29px;
+        left: 0px;
+        z-index: 2;
+        width: 150px;
+        background-color: white;
+    }
+    &__main {
+        // to change in js value 20px
+        margin: 0px 0px;
+    }
+    &__main-inner {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        @include createFlex(row, flex-start, flex-start, null);
+        @include breakpoint-down(small) {
+            @include createFlex(row, flex-start, flex-start, wrap);
+        }
+        .hide-border {
+            position: absolute;
+            top: 50%;
+            left: 95.3%;
+            height: 25px;
+            width: 25px;
+            background-color: $form-bg;
+            transform: translateY(-50%);
+        }
+        button {
+            width: 100%;
+            height: 50px;
+            background-color: $sky-blue;
+            border: 0px;
+            outline: 0px;
+            color: white;
+        }
+    }
+    &__menu-person {
+        opacity: 0;
+        box-sizing: border-box;
+        padding: 20px;
+        width: 370px;
+        position: absolute;
+        z-index: 2;
+        top: 30px;
+        left: 0px;
+        background-color: white;
+        box-shadow: 0px 0px 1px black;
+        animation: comesIn 300ms ease-in-out forwards;
+        button {
+            margin-left: auto;
+            display: block;
+            border: 0px;
+            padding: 10px 40px;
+            background-color: $sky-blue;
+            border-radius: 2px;
+        }
+    }
+    &__person-buttons {
+        min-width: 200px;
+    }
+    &__person-content {
+        box-sizing: border-box;
+        padding: 10px;
+        height: 60px;
+        min-width: 100%;
+        margin-top: 20px;
+        box-shadow: 0px 0px 1px black;
+        @include createFlex(row, space-between, center, null);
+    }
+    &__person-text {
+        p {
+            margin: 0px;
+        }
+    }
+    &__person-buttons {
+        @include createFlex(row, flex-end, center, null);
+        div {
+            margin: 0px 5px;
+            width: 40px;
+            height: 40px;
+            box-shadow: 0px 0px 1px black;
+            font-size: pxToRem(22);
+            border-radius: 2px;
+            @include createFlex(row, center, center, null);
+            &:nth-of-type(2) {
+                font-size: pxToRem(16);
+            }
+        }
+    }
+    &__input {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        height: 50px;
+        padding: 0px 30px;
+        @include createFlex(row, flex-start, center, null);
+        input {
+            height: 43px;
+            border: 0px;
+            background: transparent;
+            &:focus {
+                outline: none;
+                border: 0px;
+            }
+        }
+        &.date {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            .date-input {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 2;
+                background-color: white;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+                animation: comesInDate 300ms ease-in-out forwards;
+                @include createFlex(row, center, center, null);
+            }
+        }
+        &:first-of-type {
+            min-width: 300px;
+            @include breakpoint-down(medium) {
+                min-width: 200px;
+            }
+            @include breakpoint-down(medium-sm) {
+                min-width: 130px;
+            }
+        }
+        &:nth-of-type(3) {
+            min-width: 300px;
+            @include breakpoint-down(medium) {
+                min-width: 200px;
+            }
+            @include breakpoint-down(medium-sm) {
+                min-width: 130px;
+            }
+        }
+        &:last-of-type {
+            min-width: 150px;
+            @include breakpoint-down(medium-sm) {
+                min-width: 130px
+            }
+            @include breakpoint-down(small) {
+                min-width: 100%;
+            }
+        }
+    }
+    &__input-menu {
+        padding: 15px;
+        position: absolute;
+        z-index: 2;
+        left: 0px;
+        top: 0px;
+        width: 500px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+        animation: comesInInput 300ms ease-in-out forwards;
+        @include breakpoint-down(medium) {
+            width: 300px;
+        }
+    }
+    &__input-header {
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        @include createFlex(row, flex-start, center, null);
+        input {
+            width: 100%;
+            background: transparent;
+        }
+        width: 100%;
+        overflow-x: auto;
+    }
+    &__badge {
+        margin: 0px 3px;
+        padding: 0px 8px;
+        height: 38px;
+        min-width: 90px;
+        max-width: 108%;
+        font-size: pxToRem(12);
+        background-color: #e8e6e6;
+        border-radius: 10px;
+        @include createFlex(row, space-between, center, null);
+        div {
+            height: 20px;
+            width: 10px;
+        }
+    }
+    &__accordion-h {
+        @include createFlex(row, space-between, center, null);
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+    }
+    &__input-menu-item {
+        @include createFlex(row, space-between, center, null);
+    }
+    &__input-menu-text {
+        svg {
+            margin-right: 10px;
+        }
+    }
+    &__icons {
+        position: absolute;
+        top: 10px;
+        left: 29.7%;
+        @include breakpoint-down(medium) {
+            left: 29.8%;
+        }
+        @include breakpoint-down(medium-sm) {
+            left: 25.5%;
+        }
+    }
+    &__icons-inner {
+        position: relative;
+        top: 3px;
+        left: 0%;
+    }
+    &__icon {
+        &:first-of-type {
+            position: absolute;
+            top: 0px;
+            left: -5px;
+        }
+        &:last-of-type {
+            position: absolute;
+            top: 8px;
+            left: 5px;
+        }
+        svg {
+            color: $sky-blue;
+        }
+    }
+    &__where-from {
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0px;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+        p {
+            cursor: pointer;
+            padding: 5px 0px;
+        }
+        p:hover {
+            background-color: #f1f1f1;
+        }
+    }
+    &__checkbox {
+        margin-top: 10px;
+        width: 400px;
+    }
+    &__input-from {
+        width: 400px;
+        padding: 15px;
+        position: absolute;
+        z-index: 2;
+        top: 0px;
+        left: 0px;
+        background-color: white;
+        animation: comesInInput 300ms ease-in-out forwards;
+        @include breakpoint-down(medium) {
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid gray;
+            &:focus {
+                border: 1px solid gray;
+            }
+        }
+    }
+    &__multi {
+        display: none;
+    }
+    &__content-inner {
+        width: calc(100% + 160px);
+        margin: 0px 0px 0px -80px;
+        background-color: white;
+        @include breakpoint-down(medium) {
+            position: relative;
+            top: 0px;
+            left: 0px;
+        }
+    }
+    &__cards {
+        margin: 0px auto;
+        width: 87%;
+        padding: 50px 0px;
+        @include createFlex(row, space-between, center, wrap);
+        @include breakpoint-down(medium-sm) {
+            width: 80%;
+        }
+        @include breakpoint-down(small) {
+            width: 70%;
+        }
+    }
+    &__card {
+        width: 28%;
+        @include breakpoint-down(small) {
+            width: 80%;
+        }
+        h3 {
+            font-weight: 700;
+        }
+        p {
+            margin-top: -15px;
+            color: $font-gray;
+            min-width: 130%;
+            font-size: pxToRem(15);
+        }
+        svg {
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+        @include createFlex(row, flex-start, flex-start, null);
+    }
+    &__credentials {
+        padding: 20px 0px;
+        background-color: $nav-light-blue;
+        @include breakpoint-down(medium) {
+            position: absolute;
+            bottom: -241%;
+            left: 5%;
+            width: 100vw
+        }
+        @include breakpoint-down(medium-sm) {
+            bottom: -120%;
+            left: 7%;
+        }
+        @include breakpoint-down(small) {
+            bottom: -7%;
+            left: 12%;
+            font-size: pxToRem(14);
+        }
+        a {
+            color: white;
+            margin: 0px 8px;
+        }
+        @include createFlex(row, center, center, wrap);
+    }
+    &__field {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        border: 4px solid orange;
+        input {
+            width: 60%;
+            border: 0px;
+            margin: 20px 0px;
+            position: relative;
+            left: 50px;
+            top: 0px;
+            background: transparent;
+        }
+        span {
+            margin-left: 50px;
+        }
+        &:nth-of-type(2) {
+            border-bottom: 0px;
+        }
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+            border-top: 0px;
+            input {
+                left: 0px;
+            }
+        }
+    }
+    &__divider {
+        border-bottom: 1px solid lightgray;
+        width: 70%;
+        margin: 0px auto;
+    }
+    &__v-divider {
+        position: absolute;
+        top: 40px;
+        left: -10px;
+        transform: rotateZ(90deg);
+    }
+    &__v-dot {
+        height: 5px;
+        width: 5px;
+        border: 2px solid gray;
+        margin: 5px;
+        border-radius: 100%;
+        position: relative;
+        &:first-of-type {
+            top: 5px;
+            left: -10px
+        }
+        &:last-of-type {
+            top: -15px;
+            left: 70px;
+        }
+    }
+    &__v-line {
+        width: 60px;
+        border-bottom: 1px solid lightgray;
+        position: relative;
+        top: -5px;
+        left: 10px;
+    }
+    &__icons-sm {
+        position: absolute;
+        right: 15px;
+        top: 55px;
+        transform: rotateZ(90deg);
+    }
+}

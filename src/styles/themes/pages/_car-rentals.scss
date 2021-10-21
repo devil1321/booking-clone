@@ -1,0 +1,95 @@
+.alert{
+    img{
+        width: 10%;
+    }
+    h2{
+        margin:0px 10px;
+    }
+    a{
+        color:$sky-blue;
+        text-decoration: underline;
+    }
+}
+.rentals{
+
+    &__header{
+        svg{
+            margin-top: 10px;
+            margin-right:10px;
+        }
+        padding:20px 70px;
+        background-color: $beige;   
+        border-bottom:1px solid $beige-border;
+        @include createFlex(row,flex-start,flex-start,null);
+        &-text{
+            h1{
+                font-size:pxToRem(20);
+            }
+            a{
+                color:$sky-blue;    
+                font-weight: bold;
+            }
+        }
+    }
+    &__brands-wrapper{
+        margin:50px 0px;
+        padding:0px 70px;
+    }
+    &__brands{
+        @include createFlex(row,space-between,center,null);
+    }
+    &__card-group{
+        margin:20px 0px 50px;
+        padding:0px 70px;
+        @include createFlex(row,space-between,center,wrap);
+    }
+    &__feature{
+        margin:50px 0px;
+        padding:50px 70px;
+        background-color:$beige-rentals;
+    }
+    &__feature-items{
+        margin-top:50px;
+        @include createFlex(row,space-between,center,null);
+    }
+    &__feature-item{
+        @include createFlex(row,space-between,center,null);
+        h3,p{
+            margin:0px 10px;
+        }
+    }
+    &__accordion{
+        margin:50px 0px;
+        padding:0px 70px;
+    }
+    &__places{
+        padding:0px 70px;
+    }
+    &__places-group{
+        @include createFlex(row,space-between,center,wrap);
+    }
+    &__place{
+        margin:20px 0px;
+        overflow: hidden;
+        position: relative;
+        top:0px;
+        left:0px;
+        height:200px;
+        width: calc(100% / 4 - 20px);
+        img{
+            width: 130%;
+        }
+        &-text{
+            padding:0px 10px;
+            width: 100%;
+            position: absolute;
+            bottom:0px;
+            left:0px;
+            color:white;
+            background-color:rgba(0,0,0,0.50);
+            p{
+                margin:10px 0px;
+            }
+        }
+    }
+}

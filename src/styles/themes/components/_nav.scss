@@ -1,0 +1,56 @@
+.nav{
+    width: 100%;
+    background-color: $nav-blue;
+    padding:0px 50px;
+    box-sizing: border-box;
+    color:white;
+    svg{
+        fill:white;
+        margin-right:30px;
+    }
+    button{
+        margin:0px 5px;
+        padding:10px;
+        border-radius:3px;
+        &.btn-outline{
+            border:1px solid white;
+            color:white;
+            background: transparent
+        }
+        &.btn-white{
+            background-color: #f1f1f1;
+            color:rgb(61, 61, 218);
+            border:1px solid rgb(61, 61, 218);
+        }
+    }
+    &__header{
+        height: 100px;
+        @include createFlex(row,space-between,center,null);
+    }
+    &__lang{
+        margin: 0px 40px;
+        overflow: hidden;
+        width: 40px;
+        height:40px;
+        border-radius: 50px;
+        img{
+            width: 100%;
+        }
+    }
+    &__lg{
+        @include createFlex(row,space-between,center,null);
+        height: 100%;
+        width: 100%;
+    }
+    &__logo-lg{
+        font-size:pxToRem(30);
+        font-weight: bold;
+        span{
+            color:skyblue;
+        }
+    }
+    &__group-lg{
+        min-width: 500px;
+        @include createFlex(row,space-between,center,null);
+    }
+}

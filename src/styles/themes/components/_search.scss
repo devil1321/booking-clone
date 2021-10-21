@@ -1,0 +1,271 @@
+.search{
+    box-sizing: border-box;
+    padding:50px 80px;
+    width: 100%;
+    @include breakpoint-down(small){
+        padding:10px;
+    }
+    background-color: $form-bg;
+  
+    h1{
+        margin: 0px;
+    }
+    &__heading{
+        line-height: 0.7;
+        margin-bottom: 50px;
+    }
+
+    &__form-wrapper{
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.35);
+        @include createFlex(row,flex-start,center,null);
+        @include breakpoint-down(medium){
+            @include createFlex(row,flex-start,center,wrap);
+        }
+    }
+    &__line{
+        margin: 0px 5px;
+        width: 10px;
+        border-bottom: 1px solid black;
+        @include breakpoint-down(medium){
+            margin:0px 90px 0px 50px;
+        }
+        @include breakpoint-down(small){
+            margin:0px 50px;
+            position:relative;
+            right:-10px;
+            top:0px;
+        }
+    }
+    
+    &__field{
+        cursor: pointer;
+        box-shadow:none;
+        @include createFlex(row,flex-start,center,null);
+        &.col-1{
+            min-width: 30%;
+            @include breakpoint-down(medium){
+                min-width:100%;
+                box-sizing:border-box;
+                padding-left:158px;
+               
+            }
+            @include breakpoint-down(medium-sm){
+                padding-left:80px;
+                min-width:101.3%;
+
+            }
+            @include breakpoint-down(small){
+                padding-left:10px;
+            }
+        }
+        &.date-1{
+            @include breakpoint-down(medium){
+                margin-left:50px;
+                width:26% !important; 
+            }
+            @include breakpoint-down(medium-sm){
+                margin-left:50px;
+                width:28% !important; 
+            }
+            @include breakpoint-down(small){
+                margin-left:-40px;
+                width:31% !important; 
+
+            }
+        
+        }
+        &.date-2{
+            @include breakpoint-down(medium){
+                width:25% !important; 
+            }
+            @include breakpoint-down(medium-sm){
+                width:28% !important; 
+            }
+            
+            
+        }
+    
+        &.col-4{
+            min-width: 320px;
+            width: 25%;
+            @include breakpoint-down(medium){
+                min-width:100%;
+                box-sizing:border-box;
+                padding-right:50px;
+                height:30px;
+            }
+            @include breakpoint-down(medium-sm){
+                min-width:101.3%;
+            
+            }
+        }
+ 
+        &:first-of-type{
+            svg{
+                margin:0px 5px;
+                width: 30px;
+                height: 30px;
+            }
+            width: 28%;
+            border:4px solid orange;
+        }
+        &:last-of-type{
+            position: relative;
+            top:0px;
+            left:0px;
+            svg{
+                margin:0px 5px;
+                margin-left: 20px;
+                width: 25px;
+                height: 25px;
+            }
+     
+            border:4px solid orange;
+            border-left: 0px;
+            height: 42px;
+            @include breakpoint-down(medium){
+                border-left:4px solid orange;
+                @include createFlex(row,center,center,null);
+            }
+        }
+        input{
+            width: 100%;
+            height: 40px;
+            background: transparent;
+            border:0px;
+            
+            &:focus,&:active{
+                outline: none;
+                border:0px;
+            }
+         
+        }
+        &-multiple{
+            @include createFlex(row,flex-start,center,null);
+            
+        }
+    }
+    &__date{
+        border:4px solid orange;
+        border-left: 0px;
+        @include createFlex(row,center,center,null);
+        @include breakpoint-down(medium){
+            min-width:99%;
+            border-left:4px solid orange;
+        }
+        @include breakpoint-down(medium-sm){
+            min-width:100%;
+        }
+        @include breakpoint-down(small){
+            min-width:99%;
+        }
+        .search__field{
+            border:0px;
+            width: 40%;
+            height: 42px;
+ 
+        }
+        input{
+            width: 100%;
+            border:0px;
+        }
+ 
+      
+    }
+    &__dot{
+        margin: 0px 5px;
+        border:2px solid black;
+        background-color: black;
+        border-radius:50px;
+        @include breakpoint-down(medium){
+            margin:0px 80px;
+        }
+        @include breakpoint-down(medium-sm){
+            margin:0px 50px;
+        }
+        @include breakpoint-down(small){
+            margin:0px 20px;
+        }
+    }
+    &__icons-group{
+        position: relative;
+        top:-10px;
+        left:40px;
+        
+        svg{
+            width: 20px !important;
+            height: 20px !important;   
+        }
+        svg:first-of-type{
+            position: absolute;
+            top:-6px;
+            right:0px;
+        }
+        svg:last-of-type{
+            position: absolute;
+            top:6px;
+            right:0px;
+        }
+    }
+    &__btn-submit{
+        width: 182px;
+        height: 50px;
+        border:4px solid orange;
+        border-left: 0px;
+        color:#f1f1f1;
+        font-weight: bold;
+        background-color: $sky-blue;
+        @include breakpoint-down(medium){
+            min-width:100%;
+            border-left:4px solid orange;
+        }
+        @include breakpoint-down(medium-sm){
+            min-width:101.3%;
+        }
+    }
+    &__multiple{
+        position: absolute;
+        top:55px;
+        left:0px;
+        z-index:10;
+        padding: 10px 20px;
+        width: 280px;
+        background-color: $white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
+        @include breakpoint-down(medium){
+            left:40%;
+        }
+        @include breakpoint-down(small){
+            left:15%;
+        }
+        &-row{
+            @include createFlex(row,space-between,center,null);
+        }
+    }
+    &__multiple-controls{
+        @include createFlex(row,center,center,null);
+        .value{
+            width: 20px;
+            text-align: center;
+        }
+        .btn-control{
+            height:40px;
+            width:40px;
+            border:1px solid $sky-blue;
+            @include createFlex(row,center,center,null);
+            &.disabled{
+                color:rgb(56, 56, 56);
+                background-color: rgb(232, 232, 232);
+            }
+        }
+        
+    }
+    &__checkbox{
+        label{
+            margin-left: 10px;
+        }
+        margin-top: 20px;
+        width: 100%;
+    }
+}

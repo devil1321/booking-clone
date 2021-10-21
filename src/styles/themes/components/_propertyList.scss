@@ -1,0 +1,35 @@
+.property{
+    height: 160px;
+    background-color:$nav-light-blue;
+    @include createFlex(column,center,center,null);
+    @include breakpoint-down(medium){
+        padding:0px 20px;
+    }
+    button{
+        cursor: pointer;
+        margin:20px auto;
+        display: block;
+        padding:10px 20px;
+        background:transparent;
+        border: 2px solid white;
+        color:white;
+        font-family: $f-fam;
+        font-weight: 500;
+        border-radius: 3px;
+        &:hover{
+            background:rgba(255,255,255,0.15);
+        }
+    }
+    &__heading{
+        width: 100%;
+        border-bottom:1px solid white;
+    }
+    &__list{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        a{
+            color:white;
+            margin-right: 10px;
+        }
+    }
+}

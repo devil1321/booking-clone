@@ -1,0 +1,99 @@
+.hotels-c{
+    padding:0px 80px;
+    position: relative;
+    top:0px;
+    left:0px;
+    @include breakpoint-down(medium){
+        padding:0px 25px;
+        h2{
+            padding:0px 55px;
+            @include breakpoint-down(small){
+                padding:0px;
+                text-align:center;
+            }
+        }
+    }
+    .control{
+        cursor: pointer ;
+        padding:12px 15px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        border-radius: 100%;
+        transition: all 300ms ease-in-out;
+        opacity: 0.8;
+        &:hover{
+            opacity: 1;
+        }
+    }
+    .hotels-c__prev{
+        position: absolute;
+        z-index: 2;
+        top:28%;
+        left:55px;
+        transform:translateY(-50%);
+    }
+    .hotels-c__next{
+        position: absolute;
+        z-index: 2;
+        top:28%;
+        right:55px;
+        transform:translateY(-50%);
+    }
+    &__carousel-wrapper{
+        overflow-x: hidden;
+    }
+    &__carousel{
+        transition:all 1s ease-in-out;
+        @include createFlex(row,flex-start,flex-start,null);
+     
+    }
+    
+    &__item{
+        margin-right: 20px;
+        width: 350px;
+        h2{
+            font-size: pxToRem(20);
+            color:$sky-blue;
+        }
+        h3{
+            font-size: pxToRem(16);
+        }
+        span{
+            padding-top:8px;
+            padding-bottom:5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 25px;
+            color:white;
+        }
+        .badge-blue{
+            background-color: $nav-blue;
+        }
+        .badge-orange{
+            color:black;
+            background-color: orange;
+        }
+        .badge-red{
+            color:white;
+            background-color: red;
+        }
+        .ranking{
+            text-decoration: underline;
+        }
+       
+        &:hover{
+            img{
+                transform: scale(1.1);
+            }
+        }
+    }
+    &__image{
+        cursor: pointer;
+        overflow: hidden;
+        width: 100%;
+        height: 300px;
+        img{
+            transition: all 500ms ease-in-out;
+        }
+    }
+}
