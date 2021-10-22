@@ -12,7 +12,10 @@ const RentalsSearch = () => {
     const [age,setAge] = useState([])
     const [hours,setHours] = useState([])
     const [minutes,setMinutes] = useState([])
-
+    const [isMinutesFrom,setIsMinutesFrom] = useState(false)
+    const [isMinutesUntil,setIsMinutesUntil] = useState(false)
+    const [isHoursFrom,setIsHoursFrom] = useState(false)
+    const [isHoursUntil,setIsHoursUntil] = useState(false)
     const [fromTime,setFromTime] = useState({
         hours:"18", 
         minutes:"00"
@@ -23,18 +26,28 @@ const RentalsSearch = () => {
         minutes:"00"
     })
 
-    const handleFromTime = (e) =>{
-        setFromTime(prevState => ({
-            ...prevState,
-            [e.target.id]:e.target.innerText
-        }))
+    const handleTime = (e,time) =>{
+        let dataSet = ''
+        
+        if(e.target.dataset.id === 'hours'){
+            dataSet = 'hours'
+        }else{
+            dataSet = 'minutes'
+        }
+
+        if(time === 'from'){
+            setFromTime(prevState => ({
+                ...prevState,
+                [dataSet]:e.target.innerText
+            }))
+        }else{
+            setUntilTime(prevState => ({
+                ...prevState,
+                [dataSet]:e.target.innerText
+            }))
+        }
     }
-    const handleUntilTime = (e) =>{
-        setUntilTime(prevState => ({
-            ...prevState,
-            [e.target.id]:e.target.innerText
-        }))
-    }
+    
 
     const setAges = (startAge,endAge) =>{
         let ages = []
@@ -150,14 +163,22 @@ const RentalsSearch = () => {
                         <FontAwesomeIcon icon ={faCalendar} />
                         <input type="date" name="" id="" />   
                     </div>
-                    <div className="reantals-seach-sm__time">
-                        <p>{fromTime.hours} : {fromTime.minutes}</p>
+
+                    <div className="rentals-search-sm__time">
+                        <p><span onClick={()=>{setIsHoursFrom(true)}}>{fromTime.hours}</span> : <span onClick={()=>{setIsMinutesFrom(true)}}>{fromTime.minutes}</span></p>
+                        {isHoursFrom && 
                         <div className="rentals-search-sm__time-h">
-                            {hours.map(h => <p>{h}</p>)}
-                        </div>
+                            {hours.map(h => <p data-id="hours" onClick={(e)=>{
+                                handleTime(e,'from')
+                                setIsHoursFrom(false)
+                                }}>{h}</p>)}
+                        </div>}
+                        {isMinutesFrom && 
                         <div className="rentals-search-sm__time-m">
-                            {minutes.map(m => <p>{m}</p>)}
-                        </div>
+                            {minutes.map(m => <p data-id="minutes" onClick={(e)=>{
+                                handleTime(e,'from')
+                                setIsMinutesFrom(false)}}>{m}</p>)}
+                        </div>}
                     </div>
                 </div>
 
@@ -166,14 +187,22 @@ const RentalsSearch = () => {
                         <FontAwesomeIcon icon ={faCalendar} />
                         <input type="date" name="" id="" />   
                     </div>
-                    <div className="reantals-seach-sm__time">
-                        <p>{untilTime.hours} : {untilTime.minutes}</p>
+                    <div className="rentals-search-sm__time">
+                    <p><span onClick={()=>{setIsHoursUntil(true)}}>{untilTime.hours}</span> : <span onClick={()=>{setIsMinutesUntil(true)}}>{untilTime.minutes}</span></p>
+                        {isHoursUntil && 
                         <div className="rentals-search-sm__time-h">
-                            {hours.map(h => <p>{h}</p>)}
-                        </div>
+                            {hours.map(h => <p  data-id="hours" onClick={(e)=>{
+                                handleTime(e,'until')
+                                setIsHoursUntil(false)
+                                }}>{h}</p>)}
+                        </div>}
+                        {isMinutesUntil && 
                         <div className="rentals-search-sm__time-m">
-                            {minutes.map(m => <p>{m}</p>)}
-                        </div>
+                            {minutes.map(m => <p data-id="minutes" onClick={(e)=>{
+                                handleTime(e,'until')
+                                setIsMinutesUntil(false)
+                                }}>{m}</p>)}
+                        </div>}
                     </div>
                 </div>
              

@@ -130,11 +130,28 @@
             }
         }
     }
-    &__time {}
-    &__time-h,
-    &__time-m {
-        display: none;
+    &__time {
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+    &__time-h {
+        padding: 5px;
         position: absolute;
+        z-index: 10;
+        left: 0px;
+        top: 0px;
+        background-color: white;
+        animation: comesInTime 300ms ease-in-out forwards;
+    }
+    &__time-m {
+        padding: 5px;
+        position: absolute;
+        z-index: 10;
+        top: 0px;
+        right: 0px;
+        background-color: white;
+        animation: comesInTime 300ms ease-in-out forwards;
     }
     &__driver-age {
         display: none;
