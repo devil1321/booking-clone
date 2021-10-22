@@ -9,13 +9,19 @@ const RentalsSearch = () => {
     const [isDriverAgeShow, setIsDriverAgeShow] = useState(false)
     const [isDroppOffShow,setIsDropOffShow] = useState(false)
     
-    const [age,setAge] = useState([])
+
+    const [ageArr,setAgeArr] = useState([])
     const [hours,setHours] = useState([])
     const [minutes,setMinutes] = useState([])
+
     const [isMinutesFrom,setIsMinutesFrom] = useState(false)
     const [isMinutesUntil,setIsMinutesUntil] = useState(false)
     const [isHoursFrom,setIsHoursFrom] = useState(false)
     const [isHoursUntil,setIsHoursUntil] = useState(false)
+    const [isAge,setIsAge] = useState(false)
+
+    const [age,setAge] = useState(26)
+
     const [fromTime,setFromTime] = useState({
         hours:"18", 
         minutes:"00"
@@ -30,11 +36,11 @@ const RentalsSearch = () => {
         let dataSet = ''
         
         if(e.target.dataset.id === 'hours'){
+            let val
             dataSet = 'hours'
         }else{
             dataSet = 'minutes'
         }
-
         if(time === 'from'){
             setFromTime(prevState => ({
                 ...prevState,
@@ -54,7 +60,7 @@ const RentalsSearch = () => {
         for(let i = startAge; i < endAge; i++){
             ages.push(i)
         }
-        setAge(ages)
+        setAgeArr(ages)
     }
 
     const setTimeArrs = () =>{
@@ -165,7 +171,7 @@ const RentalsSearch = () => {
                     </div>
 
                     <div className="rentals-search-sm__time">
-                        <p><span onClick={()=>{setIsHoursFrom(true)}}>{fromTime.hours}</span> : <span onClick={()=>{setIsMinutesFrom(true)}}>{fromTime.minutes}</span></p>
+                        <p><span onClick={()=>{setIsHoursFrom(!isHoursFrom)}}>{fromTime.hours}</span> : <span onClick={()=>{setIsMinutesFrom(!isMinutesFrom)}}>{fromTime.minutes}</span></p>
                         {isHoursFrom && 
                         <div className="rentals-search-sm__time-h">
                             {hours.map(h => <p data-id="hours" onClick={(e)=>{
@@ -188,7 +194,7 @@ const RentalsSearch = () => {
                         <input type="date" name="" id="" />   
                     </div>
                     <div className="rentals-search-sm__time">
-                    <p><span onClick={()=>{setIsHoursUntil(true)}}>{untilTime.hours}</span> : <span onClick={()=>{setIsMinutesUntil(true)}}>{untilTime.minutes}</span></p>
+                    <p><span onClick={()=>{setIsHoursUntil(!isHoursUntil)}}>{untilTime.hours}</span> : <span onClick={()=>{setIsMinutesUntil(!isMinutesUntil)}}>{untilTime.minutes}</span></p>
                         {isHoursUntil && 
                         <div className="rentals-search-sm__time-h">
                             {hours.map(h => <p  data-id="hours" onClick={(e)=>{
@@ -208,10 +214,14 @@ const RentalsSearch = () => {
              
                 <div className="rentals-search-sm__field">
                     <FontAwesomeIcon icon ={faProfile} />
-                    <p>Driver Age</p>
-                    <div className="rentals-search-sm__driver-age">
-                        {age.map(a => <p>{a}</p>)}
-                    </div>
+                    <p onClick={()=>{setIsAge(!isAge)}}>Driver Age {age}</p>
+                    {isAge && 
+                        <div className="rentals-search-sm__driver-age">
+                            {ageArr.map(a => <p onClick={()=>{
+                                setIsAge(false)
+                                setAge(a)
+                                }}>{a}</p>)}
+                        </div>}
                 </div>
             </div> 
         }

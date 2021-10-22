@@ -1,64 +1,76 @@
-.rentals__card{
+.rentals__card {
     cursor: pointer;
-    overflow:hidden;
-    margin:10px 0px;
+    overflow: hidden;
+    margin: 10px 0px;
     width: 32%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     box-shadow: 0px 0px 1px rgb(41, 41, 41);
-    &:hover{
+    @include breakpoint-down(medium-sm) {
+        width: 45%;
+        margin: 10px;
+    }
+    @include breakpoint-down(small) {
+        width: 100%;
+        margin: 20px 10px;
+    }
+    &:hover {
         box-shadow: 0px 0px 3px rgb(128, 128, 128);
-        h2{
-            left:0px;
+        h2 {
+            left: 0px;
         }
     }
-    &-image{
+    &-image {
         position: relative;
-        top:0px;
-        left:0px;
-        height:300px;
+        top: 0px;
+        left: 0px;
+        height: 300px;
         overflow: hidden;
         box-shadow: 0px 0px 100px inset black;
-        img{
+        img {
             width: 120%;
             position: relative;
-            top:0px;
-            left:0px;
+            top: 0px;
+            left: 0px;
             z-index: -1;
+            @include breakpoint-down(medium) {
+                width: 200%;
+            }
         }
-        h2{
-            padding:20px;
+        h2 {
+            padding: 20px;
             background-color: rgba(255, 255, 255, 0.316);
             position: absolute;
             z-index: 2;
-            top:10px;
-            left:-500px;
-            color:white;
+            top: 10px;
+            left: -500px;
+            color: white;
             transition: all 700ms ease-in-out;
         }
     }
-    &-text{
-        padding:10px 20px;
-        h3, p{
-           margin:10px 0px;
-           color:$font-gray;
+    &-text {
+        padding: 10px 20px;
+        h3,
+        p {
+            margin: 10px 0px;
+            color: $font-gray;
         }
-        h3{
-            color:black;
+        h3 {
+            color: black;
         }
-        span{
+        span {
             font-style: italic;
             text-decoration: underline;
         }
-    }    
-    &-body{
-        @include createFlex(row,flex-start,center,null);
-        svg{
+    }
+    &-body {
+        @include createFlex(row, flex-start, center, null);
+        svg {
             color: gray;
         }
-        p{
-           margin-left:5px;
-           font-size: pxToRem(20);
+        p {
+            margin-left: 5px;
+            font-size: pxToRem(20);
         }
     }
 }

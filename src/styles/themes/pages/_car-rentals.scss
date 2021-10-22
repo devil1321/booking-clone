@@ -1,94 +1,154 @@
-.alert{
-    img{
+.alert {
+    img {
         width: 10%;
     }
-    h2{
-        margin:0px 10px;
+    h2 {
+        margin: 0px 10px;
     }
-    a{
-        color:$sky-blue;
+    a {
+        color: $sky-blue;
         text-decoration: underline;
     }
 }
-.rentals{
 
-    &__header{
-        svg{
+.accordion-ext {
+    width: calc(100% - 80px) !important;
+}
+
+.accordion-ext {
+    @include breakpoint-down(small) {
+        width: calc(100% - 20px) !important;
+    }
+}
+
+.rentals {
+    &__header {
+        svg {
             margin-top: 10px;
-            margin-right:10px;
+            margin-right: 10px;
         }
         padding:20px 70px;
-        background-color: $beige;   
+        background-color: $beige;
         border-bottom:1px solid $beige-border;
-        @include createFlex(row,flex-start,flex-start,null);
-        &-text{
-            h1{
-                font-size:pxToRem(20);
+        @include createFlex(row, flex-start, flex-start, null);
+        @include breakpoint-down(medium) {
+            padding: 0px 30px;
+        }
+        @include breakpoint-down(medium-sm) {
+            padding: 0px 20px;
+        }
+        &-text {
+            h1 {
+                font-size: pxToRem(20);
             }
-            a{
-                color:$sky-blue;    
+            a {
+                color: $sky-blue;
                 font-weight: bold;
             }
         }
     }
-    &__brands-wrapper{
-        margin:50px 0px;
-        padding:0px 70px;
+    &__brands-wrapper {
+        margin: 50px 0px;
+        padding: 0px 70px;
     }
-    &__brands{
-        @include createFlex(row,space-between,center,null);
-    }
-    &__card-group{
-        margin:20px 0px 50px;
-        padding:0px 70px;
-        @include createFlex(row,space-between,center,wrap);
-    }
-    &__feature{
-        margin:50px 0px;
-        padding:50px 70px;
-        background-color:$beige-rentals;
-    }
-    &__feature-items{
-        margin-top:50px;
-        @include createFlex(row,space-between,center,null);
-    }
-    &__feature-item{
-        @include createFlex(row,space-between,center,null);
-        h3,p{
-            margin:0px 10px;
+    &__brands {
+        @include createFlex(row, space-between, center, null);
+        @include breakpoint-down(small) {
+            position: relative;
+            left: -120px;
         }
     }
-    &__accordion{
-        margin:50px 0px;
-        padding:0px 70px;
+    &__card-group {
+        margin: 20px 0px 50px;
+        padding: 0px 70px;
+        @include createFlex(row, space-between, center, wrap);
+        @include breakpoint-down(medium-sm) {
+            padding: 0px 20px;
+        }
     }
-    &__places{
-        padding:0px 70px;
+    &__feature {
+        margin: 50px 0px;
+        padding: 50px 70px;
+        background-color: $beige-rentals;
+        @include breakpoint-down(small) {
+            padding: 50px 20px;
+        }
     }
-    &__places-group{
-        @include createFlex(row,space-between,center,wrap);
+    &__feature-items {
+        margin-top: 50px;
+        @include createFlex(row, space-between, center, null);
+        @include breakpoint-down(small) {
+            @include createFlex(row, space-between, center, wrap);
+        }
+        @media(max-device-width:320px) {
+            @include createFlex(column, center, flex-start, wrap);
+        }
     }
-    &__place{
-        margin:20px 0px;
+    &__feature-item {
+        @include createFlex(row, space-between, center, null);
+        @include breakpoint-down(small) {
+            max-width: 45%;
+            margin: 10px 0px;
+            &:last-of-type {
+                position: relative;
+                left: 40px;
+                top: 0px;
+                @media(max-device-width: 320px) {
+                    left: 0px;
+                }
+            }
+        }
+        h3,
+        p {
+            margin: 0px 10px;
+        }
+    }
+    &__accordion {
+        margin: 50px 0px;
+        padding: 0px 70px;
+        @include breakpoint-down(medium) {
+            padding: 0px 40px;
+        }
+        @include breakpoint-down(medium-sm) {
+            padding: 0px;
+        }
+    }
+    &__places {
+        padding: 0px 70px;
+    }
+    &__places-group {
+        @include createFlex(row, space-between, center, wrap);
+    }
+    &__place {
+        margin: 20px 0px;
         overflow: hidden;
         position: relative;
-        top:0px;
-        left:0px;
-        height:200px;
+        top: 0px;
+        left: 0px;
+        height: 200px;
         width: calc(100% / 4 - 20px);
-        img{
+        @include breakpoint-down(medium) {
+            width: calc(100% / 3 - 20px);
+        }
+        @include breakpoint-down(medium-sm) {
+            width: calc(100% / 2 - 20px);
+        }
+        @include breakpoint-down(small) {
+            width: 100%;
+        }
+        img {
             width: 130%;
         }
-        &-text{
-            padding:0px 10px;
+        &-text {
+            padding: 0px 10px;
             width: 100%;
             position: absolute;
-            bottom:0px;
-            left:0px;
-            color:white;
-            background-color:rgba(0,0,0,0.50);
-            p{
-                margin:10px 0px;
+            bottom: 0px;
+            left: 0px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.50);
+            p {
+                margin: 10px 0px;
             }
         }
     }
