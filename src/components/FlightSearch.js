@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlane } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -47,6 +48,9 @@ const FlightSearch = () => {
     const [isSearchWhereOpenMultiple,setIsSearchWhereOpenMultiple] = useState(false)
     const [isDateShowMultiple,setIsDateShowMultiple] = useState(false)
     const [isChoiceSm,setIsChoiceSm] = useState(false)
+    const [isFromSm,setIsFromSm] = useState(false)
+    const [isWhereSm,setIsWhereSm] = useState(false)
+    const [isFromAccordion,setIsFromAccordion] = useState(false)
     const [isMultiple,setIsMultiple] = useState(false)
 
     const [pClass,setPClass] = useState('Economy')
@@ -130,6 +134,32 @@ const FlightSearch = () => {
             date_2.style.borderRight = 0
         }
     }
+    }
+    const renderMenu = (way) =>{
+        return(
+            <div className="flight-s__from-sm">
+            <p className="flight-s__from-cancel" onClick={()=>{
+                setIsFromSm(false)
+                setIsWhereSm(false)
+                }}>Anuluj</p>
+            <h3>{way} lecisz ?</h3>
+            <input type="text" />
+            <div className="flight-s__from-sm-accordion">
+                <div className="flight-s__from-sm-acccordion-header" onClick={()=>{setIsFromAccordion(!isFromAccordion)}}>
+                <p>W twoim wyszukiwaniu (1)</p>
+                {isFromAccordion 
+                    ? <FontAwesomeIcon icon ={faChevronUp} />
+                    : <FontAwesomeIcon icon ={faChevronDown} />
+                }
+                </div>
+                {isFromAccordion && 
+                    <div className="flighs-s__accordion-text">
+                        <p>Warszawa Wszystkie Lotniska</p>
+                        <input type="checkbox" name="" id="" /> 
+                    </div>}
+            </div>
+        </div>
+        )
     }
     
     useEffect(()=>{
@@ -367,7 +397,7 @@ const FlightSearch = () => {
             :<form className="flight-s__form-sm">
                 {!isMultiple &&  
                     <div className="flight-s__header">
-                        <div className="flight-s__radio">
+                        <div className="flight-s__radio sm">
                             <input type="radio" onClick={()=>{setIsMultiple(false)}} name="choice" value="round-trip" id="" />
                             <label htmlFor="" >Round trip</label>
                         </div>
@@ -382,9 +412,9 @@ const FlightSearch = () => {
                     </div>}
                     <div className="flight-s__field">
                         <div className="flight-s__input-field">
-                            <input type="text" placeholder="Where from ?"/>
+                            <input type="text" placeholder="Where from ?" onClick={()=>{setIsFromSm(true)}}/>
                             <div className="flight-s__divider"></div>
-                            <input type="text" placeholder="Where to ?"/>
+                            <input type="text" placeholder="Where to ?"onClick={()=>{setIsWhereSm(true)}}/>
                             <div className="flight-s__v-divider">
                                 <div className="flight-s__v-dot"></div>    
                                 <div className="flight-s__v-line"></div>    
@@ -424,18 +454,26 @@ const FlightSearch = () => {
                              </div>
                      </div>}
                         <div className="flight-s__field">
+                            <FontAwesomeIcon icon={faUser} />
                             <span>When ? </span>
                             <input type="date" name="" id="" />
                         </div> 
-                        <div className="flight-s__field">
-                            1 {pClass}
-                        </div> 
-                        {isChoiceSm
-                            ? <div className="flight-s__choice-sm-menu">
+                        <div className="flight-s__field class" onClick={()=>{setIsChoiceSm(!isChoiceSm)}}>
+                            <p>1 {pClass}</p>
+                        </div>
+                        <button>Search</button>
+                        {isFromSm && renderMenu('Skąd')}
+                        {isWhereSm && renderMenu('Dokąd')}
+                        {isChoiceSm &&
+                            <div className="flight-s__choice-sm-menu">
+                                <div className="flight-s__choice-close" onClick={()=>{setIsChoiceSm(false)}}>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                                 <h3>Whose travel?</h3>
                                 <p>Travelers</p>
-                                <div className="flight-s__choice-field-a">
-                                    <div className="flight-s__choice-t">
+                                <div className="flight-s__choice-field">
+                                    <div className="flight-s__choice-text">
                                         <p>Adult</p>
                                         <p>Older than 18</p>
                                     </div>
@@ -445,8 +483,8 @@ const FlightSearch = () => {
                                         <div>+</div>
                                     </div>
                                 </div>
-                                <div className="flight-s__choice-field-c">
-                                    <div className="flight-s__choice-t">
+                                <div className="flight-s__choice-field">
+                                    <div className="flight-s__choice-text">
                                         <p>Children</p>
                                         <p>From 0 to 17 years old</p>
                                     </div>
@@ -457,26 +495,26 @@ const FlightSearch = () => {
                                     </div>
                                 </div>
                                 <h3>Travel Class</h3>
-                                <div className="flight-s__choice-r">
-                                    <input name="class " value="Economy" type="radio" />
+                                <div className="flight-s__choice-radio">
+                                    <input name="class " value="Economy" type="radio" checked/>
                                     <label htmlFor="">Economy</label>
                                 </div>
-                                <div className="flight-s__choice-r">
+                                <div className="flight-s__choice-radio">
                                     <input name="class"  value="Economy Premium" type="radio" />
                                     <label htmlFor="">Economy Premium</label>
                                 </div>
-                                <div className="flight-s__choice-r">
+                                <div className="flight-s__choice-radio">
                                     <input name="class" value="Business" type="radio"  />
                                     <label htmlFor="">Business</label>
                                 </div>
-                                <div className="flight-s__choice-r">
+                                <div className="flight-s__choice-radio">
                                     <input name="class" value="First Class" type="radio"  />
                                     <label htmlFor="">First Class</label>
                                 </div>
                                 <hr />
                                 <button>Done</button>
                               </div>
-                            : null}
+                            }
                     
             </form>}
 
