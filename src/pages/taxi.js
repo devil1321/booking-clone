@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Layout from '../components/layout'
 import Accordion from '../components/Accordion'
 import TaxiSearch from '../components/TaxiSearch'
@@ -52,16 +52,38 @@ const Taxi = () => {
     const [tabTwoShow,setTabTwoShow] = useState(false)
     const [tabThreeShow,setTabThreeShow] = useState(false)
 
-    const handleTab = (e) =>{
+    const handleTab = (e,target) =>{
+        let activeTab;
         const tabs = document.querySelectorAll('.taxi__tab')
         const btns = document.querySelectorAll('li')
         btns.forEach(btn => btn.classList.remove('active'))
         tabs.forEach(tab => tab.style.display = 'none')
-        const activeTab =  document.querySelector(`.taxi__tab.${e.target.id}`)
+        if(e){
+            activeTab =  document.querySelector(`.taxi__tab.${e.target.id}`)
+        }
+        if(target){
+            activeTab =  document.querySelector(`.taxi__tab.${target}`)
+        }
         activeTab.style.display = 'flex'
-        e.target.classList.add('active')
+        if(e){
+            e.target.classList.add('active')
+        }
+    }   
+    const handleTabMove = (e) =>{
+        const tabs = document.querySelector('.taxi__tabs-content')
+        let x = e.touches[0].pageX
+        tabs.style.position = 'relative'
+        tabs.style.left = `${x}px`
+        
     }
-
+    useEffect(()=>{
+        if(window.innerWidth < 1366){
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+                handleTab(false,'three')
+            }
+        }
+    },[])
     return (
         <Layout className="taxi">
             <Accordion isFunctional={true} heading="Protecting you during COVID-19" text="Your safety matters. From July 2020, we’re asking all customers to wear a face covering when travelling with us. If you don’t wear a face covering, your driver may not be able to start your journey. Where Coronavirus may affect your plans, here’s what you need to know about booking with us at this time."/>
@@ -144,7 +166,7 @@ const Taxi = () => {
                         <li onClick={(e)=>{handleTab(e)}} id="three">All taxis</li>
                     </ul>
                 </div>
-                <div className="taxi__tabs-contnet">
+                <div className="taxi__tabs-content" onTouchMove={(e)=>{handleTabMove(e)}}>
                     <div className="taxi__tab one" >
                       <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
                       <Tab isWide={true} title="Executive" subtitle="Mercedes-Benz E-Class or similar" passagers={3} bags={2}/>

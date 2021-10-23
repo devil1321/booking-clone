@@ -1,18 +1,17 @@
 import React,{ useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMap } from '@fortawesome/free-solid-svg-icons'
+import { faProfile } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 const TaxiSearch = () => {
 
     const [isSet,setIsSet] = useState(false)
 
-    const [time,setTime] = useState({
-        hours:"18", 
-        minutes:"00"
-    })
+
     
     const [isListShow,setIsListShow] = useState(false)
     const [isTimeShow,setIsTimeShow] = useState(false)
@@ -23,6 +22,10 @@ const TaxiSearch = () => {
     const [passagers,setPassagers] = useState(1)
     const [options,setOptions] = useState([])
 
+        const [time,setTime] = useState({
+        hours:"18", 
+        minutes:"00"
+    })
     const [hours,setHours] = useState([])
     const [minutes,setMinutes] = useState([])
 
@@ -75,7 +78,8 @@ const TaxiSearch = () => {
 
     return (
         <div className="taxi__search">
-            <form action="" className="taxi__form">
+            {window.innerWidth > 768 
+                ? <form action="" className="taxi__form">
                 <div className="taxi__radio-group">
                     <div className="taxi__radio-field">
                         <input type="radio" name="way" id="" onChange={(e)=>{setIsOneWay(true)}}/>
@@ -302,6 +306,69 @@ const TaxiSearch = () => {
                    </div> 
                 }
             </form>
+            : <div className="taxi-search-sm">
+                <form action="">
+                    <div className="taxi__radio-group">
+                        <div className="taxi__radio-field">
+                            <input type="radio" name="way" id="" onChange={(e)=>{setIsOneWay(true)}}/>
+                            <label htmlFor="">One-way</label>
+                        </div>
+                        <div className="taxi__radio-field">
+                            <input type="radio" name="way" id="" onChange={(e)=>{setIsOneWay(false)}} />
+                            <label htmlFor="">Return</label>
+                        </div>
+                    </div>
+                    <div className="taxi-search-sm__form-wrapper">
+                        <div className="taxi-search-sm__field">
+                            <FontAwesomeIcon icon={faMap} />
+                            <input type="text" />
+                        </div>
+                        <div className="taxi-search-sm__field">
+                            <FontAwesomeIcon icon={faMap} />
+                            <input type="text" />
+                        </div>
+                        <div className="taxi-search-sm__field">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            <input type="text" />
+                        </div>
+                        <div className="taxi-search-sm__field-md">
+                            <FontAwesomeIcon icon={faClock} />
+                            <p>12:00</p>
+                        </div>
+                        <div className="taxi-search-sm__field-md">
+                            <FontAwesomeIcon icon={faProfile} />
+                           <p>1</p>
+                        </div>
+                    {isOneWay && <button>Search</button>}
+                    {!isOneWay && 
+                        <React.Fragment>
+                            <div className="taxi-search-sm__field">
+                                <FontAwesomeIcon icon={faMap} />
+                                <input type="text" />
+                            </div>
+                            <div className="taxi-search-sm__field">
+                                <FontAwesomeIcon icon={faMap} />
+                                <input type="text" />
+                            </div>
+                            <div className="taxi-search-sm__field">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <input type="text" />
+                            </div>
+                            <div className="taxi-search-sm__field-md">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <input type="text" />
+                            </div>
+                            <div className="taxi-search-sm__field-md">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <input type="text" />
+                            </div>
+                            <button>Search</button>
+                        </React.Fragment>}
+                    </div>
+
+                    
+                </form>
+             </div>}
         </div>
     )
 }
