@@ -1,4 +1,14 @@
 .slider {
+    @include breakpoint-up(large) {
+        position: relative;
+        left: -15%;
+        top: 0px;
+    }
+    .swiper {
+        @include breakpoint-down(small) {
+            padding-right: 55px;
+        }
+    }
     .swiper-scrollbar {
         background: $nav-blue;
     }
@@ -8,7 +18,7 @@
     }
     @include createFlex(row, flex-start, center, null);
     &__item {
-        min-width: 200px;
+        min-width: 180px;
         position: relative;
         top: 0px;
         left: 0px;
@@ -29,13 +39,14 @@
             &:before {
                 content: "";
                 position: absolute;
-                bottom: 10px;
+                bottom: 0px;
                 left: 50%;
                 width: 100%;
                 border-bottom: 3px solid white;
                 transform: translateX(-50%);
                 @include breakpoint-down(small) {
                     width: 50%;
+                    bottom: 10px;
                 }
             }
         }

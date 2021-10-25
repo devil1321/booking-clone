@@ -1,22 +1,35 @@
 import React,{useState,useEffect} from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import { faChild } from '@fortawesome/free-solid-svg-icons'
 import { faAngleUp} from '@fortawesome/free-solid-svg-icons'
 import { faAngleDown} from '@fortawesome/free-solid-svg-icons'
 
 const Search = () => {
+    const data = useStaticQuery(graphql`
+    {
+      allLocations {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  `)
     const [formData,setFormData] = useState({
             cel:'',
-            data1:'',
-            data2:'',
             zameldowanie:'',
             wymeldowanie:'',
             dorosli:2,
             dzieci:0,
             pokoje:1
         })
-    const [showList,setShowList] = useState(false)
+    const { edges } = data.allLocations
+    const [isSearch,setIsSearch] = useState(false)
     const [showMultiple,setShowMultiple] = useState(false)
     const [isDisabledDorosli,setIsDisabledDorosli] = useState(false)
     const [isDisabledDzieci,setIsDisabledDzieci] = useState(false)
@@ -69,6 +82,21 @@ const Search = () => {
             pokoje:formData.pokoje - 1 
         }))
     }
+    const renderSearchItems = () =>{
+        return edges.map(node => {
+            const { id , name } = node.node
+            return (
+                <div onClick={()=>{
+                    setFormData(prevState => ({...prevState, cel:name}))
+                    setIsSearch(false)     
+                }} key = {id} 
+                className="search__s-item">
+                    <FontAwesomeIcon icon={faMapMarkedAlt} />
+                    {name}
+                </div>
+            )
+        })
+    }
     useEffect(()=>{
         if(formData.dorosli === 0){ 
             setIsDisabledDorosli(true)
@@ -97,15 +125,19 @@ const Search = () => {
                 <div className="search__form-wrapper">
                     <div className="search__field col-1">
                         <FontAwesomeIcon icon={faBed} />
-                        <input type="text" name="cel-podrozy" onChange={(e)=>handleChange(e)} placeholder="Where are you going?"/>
+                        <input type="text" name="cel" value={formData.cel} onClick={()=>{setIsSearch(!isSearch)}} onChange={(e)=>handleChange(e)} placeholder="Where are you going?"/>
                     </div>
+                    {isSearch && 
+                        <div className="search__s-items">
+                            {renderSearchItems()}
+                        </div>}
                     <div className="search__date">
                         <div className="search__field col-2 date-1" >
-                            <input type="date" name="date-1" id="zameldowanie"  onChange={(e)=>handleChange(e)} />
+                            <input type="date" name="zameldowanie"  onChange={(e)=>handleChange(e)} />
                         </div>
                         <div className="search__line"></div>
                         <div className="search__field col-2 date-2">
-                            <input type="date" name="date-2" id="wymeldowanie"  onChange={(e)=>handleChange(e)} />
+                            <input type="date" name="wymeldowanie"  onChange={(e)=>handleChange(e)} />
                         </div>
                     </div>
                     <div className="search__field col-4">

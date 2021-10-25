@@ -50,11 +50,9 @@ const NavSlider = () => {
             <Swiper
       // install Swiper modules
             modules={[Scrollbar]}
-                spaceBetween={80}
+                spaceBetween={window.innerWidth < 768 ? 25 : 0}
                 slidesPerView={window.innerWidth < 738 ? 3 : 5}
                 scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
             >
              <SwiperSlide>
             <Link to='/'>

@@ -1,5 +1,6 @@
 const axios = require('axios');
 const crypto = require('crypto');
+const path = require('path')
 
 const randomDate = (start, end) => {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -8,7 +9,7 @@ const randomDate = (start, end) => {
 
 
 exports.sourceNodes = async({ actions }) => {
-    const { createNode } = actions;
+    const { createNode, createPage } = actions;
 
     // const cities = ['Warsaw','Pattaya','London','New York','Berlin','Rotterdam','Buenos Aires','Sydney']
     // var collectedData  = []
@@ -42,7 +43,7 @@ exports.sourceNodes = async({ actions }) => {
     // await for results
 
 
-    // map into these results and create nodes
+
     // collectedData.map((location, i) => {
     resLocation.data.data.map((location, i) => {
         // Create your node object
@@ -334,6 +335,46 @@ exports.sourceNodes = async({ actions }) => {
 
     return;
 }
+
+
+exports.createPages = async({ graphql, actions }) => {
+    const { data } = await graphql(`
+  {
+    allLocations {
+      nodes {
+        location_id
+        carPrice
+        name
+        num_reviews
+        arrival(formatString: "")
+        flight(formatString: "")
+        geo_description
+        carRentalStart(formatString: "")
+        carRentalEnd(locale: "", formatString: "")
+        timezone
+        photo {
+          images {
+            large {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`)
+
+    data.allLocations.nodes.forEach(node => {
+        actions.createPage({
+            path: '/details/' + node.location_id,
+            component: path.resolve('./src/templates/details.jsx'),
+            context: {
+                page: node
+            }
+        })
+    })
+}
+
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     if (stage === "build-html") {

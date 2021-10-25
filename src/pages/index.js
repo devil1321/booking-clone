@@ -116,11 +116,12 @@ const IndexPage = ({data}) => {
           <h2 className="h2-title">Get inspiration for your next trip</h2>
           <div className="home__feature-1">
               {locations.slice(2,5).map(location =>{
-                const {id,name, num_reviews , photo} = location
+                const {id,name, num_reviews , photo,location_id} = location
                 if(photo === null){
                   return
                 }else{
                   return(
+                    <Link to={"/details/" + location_id}>
                     <div key={id} className="home__feature-item grid-1">
                       <div className="home__feature-image">
                       <div className="overlay"></div>
@@ -131,6 +132,7 @@ const IndexPage = ({data}) => {
                         <h3>Reviews : {num_reviews}</h3>
                       </div>
                     </div>
+                    </Link>
                     )
                   }
               })}

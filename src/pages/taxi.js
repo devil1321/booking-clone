@@ -56,7 +56,7 @@ const Taxi = () => {
     const handleTab = (e) =>{
         let activeTab;
         var tabs = document.querySelectorAll('.taxi__tab')
-        if(tabs){
+        if(tabs && e){
             var btns = document.querySelectorAll('li')
             btns.forEach(btn => btn.classList.remove('active'))
             tabs.forEach(tab => tab.style.display = 'none')

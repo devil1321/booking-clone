@@ -1,56 +1,125 @@
-.nav{
+.nav {
     width: 100%;
     background-color: $nav-blue;
-    padding:0px 50px;
     box-sizing: border-box;
-    color:white;
-    svg{
-        fill:white;
-        margin-right:30px;
+    color: white;
+    svg {
+        fill: white;
+        margin-right: 30px;
     }
-    button{
-        margin:0px 5px;
-        padding:10px;
-        border-radius:3px;
-        &.btn-outline{
-            border:1px solid white;
-            color:white;
+    button {
+        margin: 0px 5px;
+        padding: 10px;
+        border-radius: 3px;
+        &.btn-outline {
+            border: 1px solid white;
+            color: white;
             background: transparent
         }
-        &.btn-white{
+        &.btn-white {
             background-color: #f1f1f1;
-            color:rgb(61, 61, 218);
-            border:1px solid rgb(61, 61, 218);
+            color: rgb(61, 61, 218);
+            border: 1px solid rgb(61, 61, 218);
         }
     }
-    &__header{
+    &__header {
         height: 100px;
-        @include createFlex(row,space-between,center,null);
+        @include createFlex(row, space-between, center, null);
     }
-    &__lang{
+    &__lang {
         margin: 0px 40px;
         overflow: hidden;
         width: 40px;
-        height:40px;
+        height: 40px;
         border-radius: 50px;
-        img{
+        img {
             width: 100%;
         }
     }
-    &__lg{
-        @include createFlex(row,space-between,center,null);
+    &__lg {
+        @include createFlex(row, space-between, center, null);
         height: 100%;
         width: 100%;
+        padding: 0px 70px;
     }
-    &__logo-lg{
-        font-size:pxToRem(30);
+    &__logo-lg {
+        font-size: pxToRem(30);
         font-weight: bold;
-        span{
-            color:skyblue;
+        span {
+            color: skyblue;
         }
     }
-    &__group-lg{
+    &__group-lg {
         min-width: 500px;
-        @include createFlex(row,space-between,center,null);
+        @include createFlex(row, space-between, center, null);
+    }
+    &__sm {
+        padding: 0px 0px 0px 25px;
+        width: 100%;
+        @include createFlex(row, space-between, center, null);
+    }
+    &__logo {
+        font-size: pxToRem(20);
+    }
+    &__sm-group {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        svg {
+            position: relative;
+            left: -90%;
+            top: 0px;
+        }
+    }
+    &__sm-btn {
+        position: absolute;
+        top: -10px;
+        right: 20px;
+        span {
+            display: block;
+            width: 40px;
+            border-bottom: 3px solid white;
+            margin: 8px 0px;
+        }
+    }
+    &__sm-menu {
+        padding: 10px 20px;
+        overflow-y: scroll;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        z-index: 10;
+        top: 0px;
+        left: 0px;
+        color: black;
+        background-color: white;
+        animation: comesInInput 300ms ease-in-out forwards;
+        a {
+            margin: 30px 0px;
+            color: black;
+            display: block;
+            @include createFlex(row, flex-start, center, null);
+        }
+        svg {
+            fill: black;
+            margin-right: 8px;
+        }
+    }
+    &__close-btn {
+        span {
+            margin-left: auto;
+            margin-top: 20px;
+            margin-right: 30px;
+            display: block;
+            width: 40px;
+            border-bottom: 2px solid lightgray;
+            transform-origin: 5px 1px;
+            &:first-of-type {
+                transform: rotate(45deg);
+            }
+            &:last-of-type {
+                transform: rotate(-45deg);
+            }
+        }
     }
 }

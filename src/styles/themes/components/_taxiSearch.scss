@@ -249,6 +249,9 @@
         &:not(:last-of-type) {
             border-bottom: 0px;
         }
+        svg {
+            margin-right: 5px;
+        }
         input {
             margin-left: 10px;
             width: 80%;
