@@ -53,31 +53,19 @@ const Taxi = () => {
       }
     ]
 
-    const [tabOneShow,setTabOneShow] = useState(true)
-    const [tabTwoShow,setTabTwoShow] = useState(false)
-    const [tabThreeShow,setTabThreeShow] = useState(false)
-
-    const handleTab = (e,target) =>{
+    const handleTab = (e) =>{
         let activeTab;
         var tabs = document.querySelectorAll('.taxi__tab')
         if(tabs){
             var btns = document.querySelectorAll('li')
             btns.forEach(btn => btn.classList.remove('active'))
-             tabs.forEach(tab => tab.style.display = 'none')
-        if(e){
-            activeTab =  document.querySelector(`.taxi__tab.${e.target.id}`)
-        }
-        if(target){
-            activeTab =  document.querySelector(`.taxi__tab.${target}`)
-            if(activeTab){
-                activeTab.style.display = 'flex'
-            }
-        }
-        if(e){
+            tabs.forEach(tab => tab.style.display = 'none')
+            activeTab =  document.querySelector(`.taxi__tab.${e.target.id}`)            
+            activeTab.style.display = 'flex'
             e.target.classList.add('active')
         }
     }   
-}
+
 
     
     useEffect(()=>{
@@ -198,7 +186,7 @@ const Taxi = () => {
                           <Swiper
                                 modules={[Pagination]}
                                 spaceBetween={50} 
-                                slidesPerView={window.innerWidth < 1024 ? 1 : 2}
+                                slidesPerView={window.innerWidth < 735 ? 1 : 2}
                                 pagination={{ clickable: true }}                          
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}>
