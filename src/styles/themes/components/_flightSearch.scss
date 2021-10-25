@@ -241,6 +241,12 @@
         @include breakpoint-down(medium-sm) {
             left: 25.5%;
         }
+        @include breakpoint-down-l(medium) {
+            left: 26%;
+        }
+        @media (max-device-width:767px) and (orientation:landscape) {
+            left: 26.5%;
+        }
     }
     &__icons-inner {
         position: relative;

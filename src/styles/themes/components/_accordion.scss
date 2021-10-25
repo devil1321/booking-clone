@@ -1,33 +1,38 @@
-.accordion{
+.accordion {
     padding-left: 25px;
     background-color: $beige;
-    padding-bottom:20px;
-    position:relative;
-    top:0px;
-    left:0px;
-    &__heading{
+    padding-bottom: 20px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    &__heading {
         cursor: pointer;
-        padding:0px 90px;
-        @include createFlex(row,space-between,center,null);
-        &-text{
-            position: relative;
-            top:0px;
-            left:0px;   
-      
+        padding: 0px 90px;
+        @include createFlex(row, space-between, center, null);
+        @include breakpoint-down(medium) {
+            padding: 0px 40px;
         }
-        #info-icon{
+        @include breakpoint-down(small) {
+            padding: 0px 30px;
+        }
+        &-text {
+            position: relative;
+            top: 0px;
+            left: 0px;
+        }
+        #info-icon {
             position: absolute;
-            top:33px;
-            left:-40px;
+            top: 33px;
+            left: -40px;
         }
     }
-    &__text{
+    &__text {
         overflow: hidden;
-        padding:0px 90px;
-        a{
+        padding: 0px 90px;
+        a {
             margin-top: 20px;
             display: block;
-            color:$sky-blue;
+            color: $sky-blue;
         }
     }
 }

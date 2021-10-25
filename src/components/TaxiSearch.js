@@ -342,6 +342,7 @@ const TaxiSearch = () => {
                     {isOneWay && <button>Search</button>}
                     {!isOneWay && 
                         <React.Fragment>
+                            <div className="taxi-search-sm__line"></div>
                             <div className="taxi-search-sm__field">
                                 <FontAwesomeIcon icon={faMap} />
                                 <input type="text" />

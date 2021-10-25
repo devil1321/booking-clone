@@ -2,6 +2,9 @@
     min-width: 50%;
     width: calc(100% - 140px);
     margin: 50px auto;
+    @include breakpoint-down(small) {
+        min-width: 100%;
+    }
     a {
         color: $sky-blue;
         font-weight: bold;
@@ -9,6 +12,12 @@
     }
     &__title {
         color: black;
+    }
+    &__group {
+        border: 0px !important;
+    }
+    &__item {
+        border: 0px !important;
     }
 }
 
@@ -28,7 +37,13 @@
         center,
         null);
         @include breakpoint-down(medium-sm) {
-            padding: 0px 10px;
+            padding: 0px 20px;
+        }
+        @include breakpoint-down(small) {
+            height: 100%;
+            padding: 0px;
+            background-image: none;
+            background-color: $very-light-blue;
         }
         h1 {
             margin: 0px;
@@ -42,16 +57,28 @@
         height: 100%;
         background-color: rgb(4, 4, 158);
         opacity: 0.5;
+        @include breakpoint-down(small) {
+            display: none;
+        }
     }
     &__hero-text {
         position: relative;
         top: 0px;
         left: 0px;
         z-index: 2;
+        @include breakpoint-down-l(medium) {
+            left: -4%;
+        }
+        @media(max-device-width:767px) and (orientation:landscape) {
+            left: 0px;
+        }
         h1,
         h3 {
             color: white;
             margin: 5px 0px;
+            @include breakpoint-down(small) {
+                color: black;
+            }
         }
     }
     &__feature {
@@ -115,10 +142,16 @@
     }
     &__article {
         padding: 0px 70px;
+        @include breakpoint-down(small) {
+            padding: 0px;
+        }
         h2 {
             text-align: center;
             font-size: pxToRem(40);
             font-weight: $f-reg;
+            @include breakpoint-down(small) {
+                font-size: pxToRem(30);
+            }
         }
     }
     &__article-main {
@@ -138,6 +171,10 @@
         @include breakpoint-down(medium) {
             margin-left: 50px;
             width: 70%;
+        }
+        @include breakpoint-down(small) {
+            width: 95%;
+            margin: 0px auto;
         }
     }
     &__article-item {
@@ -166,6 +203,12 @@
         width: 50%;
         @include breakpoint-down(medium) {
             width: 100%;
+        }
+        @include breakpoint-down(small) {
+            position: relative;
+            left: -20%;
+            top: 0px;
+            width: 150%;
         }
         img {
             display: block;
@@ -263,11 +306,17 @@
         @include breakpoint-down(medium) {
             min-width: 200%;
         }
+        @include breakpoint-down(small) {
+            min-width: 300%;
+        }
     }
     &__tab {
         display: none;
         &:first-of-type {
             display: flex;
+        }
+        @include breakpoint-down(small) {
+            transform: translateX(-20%);
         }
     }
 }

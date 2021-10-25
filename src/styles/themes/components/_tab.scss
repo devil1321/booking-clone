@@ -9,6 +9,10 @@
         min-height: 300px;
         margin: 0px 10px;
     }
+    @include breakpoint-down(small) {
+        min-width: 300px !important;
+        width: 40% !important;
+    }
     &__content {
         padding: 0px 30px;
     }

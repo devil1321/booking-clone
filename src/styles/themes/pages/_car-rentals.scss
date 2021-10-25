@@ -13,11 +13,8 @@
 
 .accordion-ext {
     width: calc(100% - 80px) !important;
-}
-
-.accordion-ext {
-    @include breakpoint-down(small) {
-        width: calc(100% - 20px) !important;
+    @include breakpoint-down-l(medium) {
+        min-width: 95% !important;
     }
 }
 
