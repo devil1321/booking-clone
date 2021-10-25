@@ -7,6 +7,11 @@ import Tab from '../components/Tab'
 import SubscribeForm from '../components/SubscribeForm'
 import PropertyList from '../components/PropertyList'
 import Footer from '../components/Footer/Footer'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+
+import 'swiper/css/pagination';
+import 'swiper/css';
 const Taxi = () => {
 
     const acorriodionNodes = [
@@ -54,28 +59,27 @@ const Taxi = () => {
 
     const handleTab = (e,target) =>{
         let activeTab;
-        const tabs = document.querySelectorAll('.taxi__tab')
-        const btns = document.querySelectorAll('li')
-        btns.forEach(btn => btn.classList.remove('active'))
-        tabs.forEach(tab => tab.style.display = 'none')
+        var tabs = document.querySelectorAll('.taxi__tab')
+        if(tabs){
+            var btns = document.querySelectorAll('li')
+            btns.forEach(btn => btn.classList.remove('active'))
+             tabs.forEach(tab => tab.style.display = 'none')
         if(e){
             activeTab =  document.querySelector(`.taxi__tab.${e.target.id}`)
         }
         if(target){
             activeTab =  document.querySelector(`.taxi__tab.${target}`)
+            if(activeTab){
+                activeTab.style.display = 'flex'
+            }
         }
-        activeTab.style.display = 'flex'
         if(e){
             e.target.classList.add('active')
         }
     }   
-    const handleTabMove = (e) =>{
-        const tabs = document.querySelector('.taxi__tabs-content')
-        let x = e.touches[0].pageX
-        tabs.style.position = 'relative'
-        tabs.style.left = `${x}px`
-        
-    }
+}
+
+    
     useEffect(()=>{
         if(window.innerWidth < 1366){
             var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -166,7 +170,8 @@ const Taxi = () => {
                         <li onClick={(e)=>{handleTab(e)}} id="three">All taxis</li>
                     </ul>
                 </div>
-                <div className="taxi__tabs-content" onTouchMove={(e)=>{handleTabMove(e)}}>
+                {window.innerWidth > 1024 && 
+                <div className="taxi__tabs-content" >
                     <div className="taxi__tab one" >
                       <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
                       <Tab isWide={true} title="Executive" subtitle="Mercedes-Benz E-Class or similar" passagers={3} bags={2}/>
@@ -187,7 +192,34 @@ const Taxi = () => {
                             <Tab title="Large people carrier" subtitle="Ford Tourneo or similar" passagers={7} bags={7}/>
                         </div>
                     </div>
-                </div>
+                </div>}
+                {window.innerWidth <=1024 && 
+                    <React.Fragment>
+                          <Swiper
+                                modules={[Pagination]}
+                                spaceBetween={50} 
+                                slidesPerView={window.innerWidth < 1024 ? 1 : 2}
+                                pagination={{ clickable: true }}                          
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}>
+                                <SwiperSlide>
+                                    <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                     <Tab isWide={true} title="Executive" subtitle="Mercedes-Benz E-Class or similar" passagers={3} bags={2}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Tab title="People carrier" subtitle="Peugeot 5008 or similar" passagers={5} bags={5}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Tab title="Executive people carrier" subtitle="Mercedes-Benz V-Class or similar" passagers={6} bags={6}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Tab title="Large people carrier" subtitle="Ford Tourneo or similar" passagers={7} bags={7}/>
+                                </SwiperSlide>
+                         </Swiper>
+                    </React.Fragment> 
+                }
             </div>
             <AccordionExtentend description="Find out more about our airport taxi service" subtitle="See more FAQs on our" content={acorriodionNodes} link="help page" href="#"/>
             <SubscribeForm />

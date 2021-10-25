@@ -252,6 +252,9 @@
     &__tabs {
         background-color: $form-bg;
         padding: 30px 70px;
+        @include breakpoint-down(medium) {
+            padding: 0px;
+        }
         &>h2 {
             text-align: center;
         }
