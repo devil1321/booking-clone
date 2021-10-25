@@ -1,11 +1,14 @@
 /*----------------------GLOBAL--------------------------*/
+
 @import '../normalize';
 @import '../mixins';
 @import '../variables';
 @import '../fonts';
 @import '../animations';
 @import '../global';
+
 /*----------------------COMPONENTS----------------------*/
+
 @import './components/nav';
 @import './components/navSlider';
 @import './components/accordion';
@@ -26,7 +29,9 @@
 @import './components/propertyList';
 @import './components/homeTabs';
 @import './components/footer';
+
 /*----------------------PAGES---------------------------*/
+
 @import './pages/home';
 @import './pages/flights';
 @import './pages/car-rentals';
