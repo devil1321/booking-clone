@@ -121,18 +121,18 @@ const IndexPage = ({data}) => {
                   return
                 }else{
                   return(
-                    <Link to={"/details/" + location_id}>
                     <div key={id} className="home__feature-item grid-1">
-                      <div className="home__feature-image">
-                      <div className="overlay"></div>
-                        <img src={photo.images.large.url} alt="" />
-                      </div>
+                          <Link to={"/details/" + location_id}>
+                            <div className="home__feature-image">
+                              <div className="overlay"></div>
+                              <img src={photo.images.large.url} alt="" />
+                            </div>
+                          </Link>
                       <div className="home__feature-text">
                         <h2>{name}</h2>
                         <h3>Reviews : {num_reviews}</h3>
                       </div>
                     </div>
-                    </Link>
                     )
                   }
               })}

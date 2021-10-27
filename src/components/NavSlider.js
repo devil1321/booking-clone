@@ -1,4 +1,4 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import Link from 'gatsby-link'
 import { Scrollbar } from 'swiper';
 
@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 const NavSlider = () => {
-
+    const [isSmall,setIsSmall] = useState(false)
     const stays = useRef()
     const flights = useRef()
     const rentals = useRef()
@@ -41,8 +41,18 @@ const NavSlider = () => {
         }
 
     }
+    const handleWindow = () =>{
+        if(typeof window !== undefined){
+            if(window.innerWidth < 768){
+                setIsSmall(true)
+            }else{
+                setIsSmall(false)
+            }
+        }
+    }
     
     useEffect(()=>{
+        handleWindow()
         setActive()
     })
     return (
@@ -50,8 +60,8 @@ const NavSlider = () => {
             <Swiper
       // install Swiper modules
             modules={[Scrollbar]}
-                spaceBetween={window.innerWidth < 768 ? 25 : 0}
-                slidesPerView={window.innerWidth < 738 ? 3 : 5}
+                spaceBetween={isSmall ? 25 : 0}
+                slidesPerView={isSmall ? 3 : 5}
                 scrollbar={{ draggable: true }}
             >
              <SwiperSlide>

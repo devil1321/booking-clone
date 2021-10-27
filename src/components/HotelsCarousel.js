@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { useStaticQuery, graphql } from "gatsby"
+import Link from 'gatsby-link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faChevronLeft} from '@fortawesome/free-solid-svg-icons'
@@ -12,24 +13,13 @@ const HotelsCarousel = () => {
       allHotels(limit: 10) {
         edges {
           node {
+            location_id
             id
             is_closed
             name
             photo {
               images {
                 large {
-                  url
-                }
-                medium {
-                  url
-                }
-                original {
-                  url
-                }
-                small {
-                  url
-                }
-                thumbnail {
                   url
                 }
               }
@@ -84,12 +74,13 @@ const HotelsCarousel = () => {
             <div className="hotels-c__carousel-wrapper">
               <div className="hotels-c__carousel" ref={carRef}>
                   {hotels.map(hotel=>{
-                      const { id, name, price, ranking, rating, timezone , photo } = hotel.node
+                      const { location_id,id, name, price, ranking, rating, timezone , photo } = hotel.node
                       if(photo === null){
                           return
                       }else{
                           return (
                               <div className="hotels-c__item" ref={carItemRef} key={id}>
+                                <Link to={`hotels/${location_id}`}>
                                   <div className="hotels-c__item-overlay"></div>
                                   <div className="hotels-c__image">
                                       <img src={photo.images.large.url}/>
@@ -103,6 +94,7 @@ const HotelsCarousel = () => {
                                       <h3 className="ranking">{ranking}</h3>
                                       <h3>{timezone}</h3>
                                   </div>
+                                  </Link>
                               </div>
                               )
                       }

@@ -13,7 +13,7 @@ import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 const Taxi = () => {
-
+    const [isSmall,setIsSmall] = useState(false)
     const acorriodionNodes = [
       {
         node:{
@@ -66,13 +66,25 @@ const Taxi = () => {
         }
     }   
 
+    const handleWindow = () =>{
+        if(typeof window !== undefined){
+            if(window.innerWidth < 768){
+                setIsSmall(true)
+            }else{
+                setIsSmall(false)
+            }
+        }
+    }
 
     
     useEffect(()=>{
-        if(window.innerWidth < 1366){
-            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-                handleTab(false,'three')
+        if(typeof window !== undefined){
+            handleWindow()
+            if(window.innerWidth < 1366){
+                var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                if (isMobile) {
+                    handleTab(false,'three')
+                }
             }
         }
     },[])
@@ -158,7 +170,7 @@ const Taxi = () => {
                         <li onClick={(e)=>{handleTab(e)}} id="three">All taxis</li>
                     </ul>
                 </div>
-                {window.innerWidth > 1024 && 
+                {!isSmall && 
                 <div className="taxi__tabs-content" >
                     <div className="taxi__tab one" >
                       <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
@@ -181,12 +193,12 @@ const Taxi = () => {
                         </div>
                     </div>
                 </div>}
-                {window.innerWidth <=1024 && 
+                {isSmall &&
                     <React.Fragment>
                           <Swiper
                                 modules={[Pagination]}
                                 spaceBetween={50} 
-                                slidesPerView={window.innerWidth < 735 ? 1 : 2}
+                                slidesPerView={isSmall ? 1 : 2}
                                 pagination={{ clickable: true }}                          
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}>

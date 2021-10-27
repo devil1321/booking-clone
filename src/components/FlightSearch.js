@@ -53,6 +53,8 @@ const FlightSearch = () => {
     const [isFromAccordion,setIsFromAccordion] = useState(false)
     const [isMultiple,setIsMultiple] = useState(false)
 
+    const [isSmall,setIsSmall] = useState(false)
+
     const [pClass,setPClass] = useState('Economy')
     const [formData,setFormData] = useState({
         places:[]
@@ -110,31 +112,43 @@ const FlightSearch = () => {
     }
 
     const handleStyles = () =>{
-        if(window.innerWidth > 767){
-        const mainInner = document.querySelectorAll('.flight-s__main-inner')
-        const inputs = document.querySelectorAll('.flight-s__input')
-            const date_1 = mainInner[0].querySelector('.flight-s__input.date')
-            
-            if(!isMultiple){
-            mainInner[0].style.border = '4px solid orange'
-            inputs.forEach(input => {
-                input.style.borderRight = '4px solid orange'
-            })
-            date_1.style.borderRight = "4px solid orange"
-        }else{
-            const date_2 = mainInner[1].querySelector('.flight-s__input.date')
-            mainInner[0].style.border = '4px solid orange'
-            mainInner[1].style.border = '4px solid orange'
-            mainInner[0].style.borderBottom = '4px solid grey'
-            mainInner[1].style.borderTop = '0px'
-            inputs.forEach(input =>{
-                input.style.borderRight = '4px solid grey'
-            })
-            date_1.style.borderRight = 0
-            date_2.style.borderRight = 0
+        if(typeof window !== undefined){
+            if(window.innerWidth > 767){
+                const mainInner = document.querySelectorAll('.flight-s__main-inner')
+                const inputs = document.querySelectorAll('.flight-s__input')
+                const date_1 = mainInner[0].querySelector('.flight-s__input.date')
+                if(!isMultiple){
+                mainInner[0].style.border = '4px solid orange'
+                inputs.forEach(input => {
+                    input.style.borderRight = '4px solid orange'
+                })
+                date_1.style.borderRight = "4px solid orange"
+            }else{
+                const date_2 = mainInner[1].querySelector('.flight-s__input.date')
+                mainInner[0].style.border = '4px solid orange'
+                mainInner[1].style.border = '4px solid orange'
+                mainInner[0].style.borderBottom = '4px solid grey'
+                mainInner[1].style.borderTop = '0px'
+                inputs.forEach(input =>{
+                    input.style.borderRight = '4px solid grey'
+                })
+                date_1.style.borderRight = 0
+                date_2.style.borderRight = 0
+            }
         }
     }
+}
+const handleWindow = () =>{
+    if(typeof window !== undefined){
+        if(window.innerWidth < 768){
+            setIsSmall(true)
+        }else{
+            setIsSmall(false)
+        }
     }
+}
+
+
     const renderMenu = (way) =>{
         return(
             <div className="flight-s__from-sm">
@@ -161,8 +175,9 @@ const FlightSearch = () => {
         </div>
         )
     }
-    
+
     useEffect(()=>{
+        handleWindow()
         if(searchPlaces.length == 0){
             setIsSearchOpen(false)
         }
@@ -171,7 +186,7 @@ const FlightSearch = () => {
     
     return (
         <div className="flight-s">
-            {window.innerWidth > 767 ? <form action="" className="flight-s__form" onSubmit = {(e)=>{handleSubmit(e)}}>
+            {!isSmall ? <form action="" className="flight-s__form" onSubmit = {(e)=>{handleSubmit(e)}}>
                 <div className="flight-s__header">
                     <div className="flight-s__radio">
                         <input type="radio" onClick={()=>{setIsMultiple(false)}} name="choice" value="round-trip" id="" />

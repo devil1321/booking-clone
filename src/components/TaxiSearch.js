@@ -10,8 +10,7 @@ import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 const TaxiSearch = () => {
 
     const [isSet,setIsSet] = useState(false)
-
-
+    const [isSmall,setIsSmall] = useState(false)
     
     const [isListShow,setIsListShow] = useState(false)
     const [isTimeShow,setIsTimeShow] = useState(false)
@@ -68,8 +67,17 @@ const TaxiSearch = () => {
         }
         setMinutes(minutes)
     }
-
+    const handleWindow = () =>{
+        if(typeof window !== undefined){
+            if(window.innerWidth < 768){
+                setIsSmall(true)
+            }else{
+                setIsSmall(false)
+            }
+        }
+    }
     useEffect(()=>{
+        handleWindow()
         if(!isSet){
             setOptionsArr()
             setTimeArrs()
@@ -78,7 +86,7 @@ const TaxiSearch = () => {
 
     return (
         <div className="taxi__search">
-            {window.innerWidth > 768 
+            {!isSmall
                 ? <form action="" className="taxi__form">
                 <div className="taxi__radio-group">
                     <div className="taxi__radio-field">

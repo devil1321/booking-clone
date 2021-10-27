@@ -1,9 +1,24 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const AttractionsSearch = () => {
     const [isSearch,setIsSearch] = useState(false)
+    const [isSmall,setIsSmall] = useState(false)
+
+    const handleWindow = () =>{
+        if(typeof window !== undefined){
+            if(window.innerWidth < 768){
+                setIsSmall(true)
+            }else{
+                setIsSmall(false)
+            }
+        }
+    }
+
+    useEffect(()=>{
+        handleWindow()
+    },[])
     return (
         <div className="attractions__search-wrapper">
             <div className="attractions__search">
@@ -12,8 +27,8 @@ const AttractionsSearch = () => {
                 <form action="" className="attractions__form">
                     <div className="attractions__field">
                         <FontAwesomeIcon icon={faSearch} />
-                        {window.innerWidth > 767 ? <input type="text" placeholder="Destinations, museums, tours..." /> : null}
-                        {window.innerWidth < 768 ? <input onClick={() => setIsSearch(true)} type="text" placeholder="Destinations, museums, tours..." /> : null}
+                        {!isSmall && <input type="text" placeholder="Destinations, museums, tours..." /> }
+                        {isSmall &&  <input onClick={() => setIsSearch(true)} type="text" placeholder="Destinations, museums, tours..." />}
                         <button type="submit" className="attractions__submit">Search</button>
                     </div>
                     {isSearch &&

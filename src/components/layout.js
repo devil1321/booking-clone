@@ -23,11 +23,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="main-wrapper">
-      <Nav />
-        {children}
-      <FooterFoot />
-    </div>
+      <div className="main-wrapper">
+        <Nav />
+          {children}
+        <FooterFoot />
+      </div>
   )
 }
 

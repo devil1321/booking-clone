@@ -6,6 +6,7 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 const RentalsSearch = () => {
 
+    const [isSmall,setIsSmall] = useState(false)
     const [isDriverAgeShow, setIsDriverAgeShow] = useState(false)
     const [isDroppOffShow,setIsDropOffShow] = useState(false)
     
@@ -31,7 +32,15 @@ const RentalsSearch = () => {
         hours:"18", 
         minutes:"00"
     })
-
+    const handleWindow = () =>{
+        if(typeof window !== undefined){
+            if(window.innerWidth < 1023){
+                setIsSmall(true)
+            }else{
+                setIsSmall(false)
+            }
+        }
+    }
     const handleTime = (e,time) =>{
         let dataSet = ''
         
@@ -88,6 +97,7 @@ const RentalsSearch = () => {
     }
     
     useEffect(()=>{
+        handleWindow()
         setAges(26,45)
         setTimeArrs()
         const pickup = document.querySelector('.pickup')
@@ -109,7 +119,7 @@ const RentalsSearch = () => {
 
     return (
         <React.Fragment>
-        {window.innerWidth > 1024  
+        {!isSmall
         ?   <div className="rentals-search lg">
                 <h2>Car hire for any kind of trip</h2>
                 <p>Compare deals from the biggest car hire companies</p>

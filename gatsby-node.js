@@ -11,16 +11,16 @@ const randomDate = (start, end) => {
 exports.sourceNodes = async({ actions }) => {
     const { createNode, createPage } = actions;
 
-    // const cities = ['Warsaw','Pattaya','London','New York','Berlin','Rotterdam','Buenos Aires','Sydney']
-    // var collectedData  = []
+    const cities = ['Warsaw', 'Pattaya', 'London', 'New York', 'Berlin', 'Rotterdam', 'Buenos Aires', 'Sydney']
+    var collectedData = []
 
-    // for(city of cities){
+    for(city of cities){
     const optionsLocation = {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/locations/search',
         params: {
-            query: 'pattaya',
-            // query: city,
+            // query: 'pattaya',
+            query: city,
             limit: '30',
             offset: '0',
             units: 'km',
@@ -36,16 +36,16 @@ exports.sourceNodes = async({ actions }) => {
     };
     const fetchRandomLocation = () => axios.request(optionsLocation);
     const resLocation = await fetchRandomLocation();
-    // collectedData.push(...resLocation.data.data)
-    // }
+    collectedData.push(...resLocation.data.data)
+    }
 
     // fetch raw data from the randomuser api
     // await for results
 
 
 
-    // collectedData.map((location, i) => {
-    resLocation.data.data.map((location, i) => {
+    collectedData.map((location, i) => {
+    // resLocation.data.data.map((location, i) => {
         // Create your node object
         const { result_type, scope, is_top_result } = location
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, description, category_counts, nearby_attractions, web_url, ancestors, category, subcategory, is_jfy_enabled, nearest_metro_station, geo_description } = location.result_object
@@ -138,12 +138,15 @@ exports.sourceNodes = async({ actions }) => {
         createNode(locationNode);
     });
 
+    let collectedHotels = []
+    for(city of collectedData){
+        const { location_id } = city.result_object
 
-    const optionsHotel = {
-        method: 'GET',
-        url: 'https://travel-advisor.p.rapidapi.com/hotels/list',
-        params: {
-            location_id: '293919',
+        const optionsHotel = {
+            method: 'GET',
+            url: 'https://travel-advisor.p.rapidapi.com/hotels/list',
+            params: {
+            location_id: location_id,
             adults: '1',
             rooms: '1',
             nights: '2',
@@ -159,15 +162,19 @@ exports.sourceNodes = async({ actions }) => {
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
         }
     };
-
+    
     // fetch raw data from the randomuser api
     const fetchRandomHotel = () => axios.request(optionsHotel);
     // await for results
     const resHotel = await fetchRandomHotel();
+    console.log(...resHotel.data.data)
+    // collectedHotels.push(...resHotel.data)
+
+}
 
 
     // map into these results and create nodes
-    resHotel.data.data.map((hotel, i) => {
+   collectedHotels.map((hotel, i) => {
         // Create your node object
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, autobroaden_label, raw_ranking, ranking_geo, ranking_geo_id, ranking_position, ranking_category, ranking, rating, is_closed, price_level, price, hotel_class, hotel_class_attribution, listing_key } = hotel
 
@@ -247,11 +254,15 @@ exports.sourceNodes = async({ actions }) => {
         createNode(hotelNode);
     });
 
-    const optionsRestaurant = {
-        method: 'GET',
-        url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
-        params: {
-            location_id: '293919',
+    let collectedRestaurants = []
+
+    for(city of collectedData){
+        const { location_id } = city.result_object
+        const optionsRestaurant = {
+            method: 'GET',
+            url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
+            params: {
+            location_id: location_id,
             restaurant_tagcategory: '10591',
             restaurant_tagcategory_standalone: '10591',
             currency: 'USD',
@@ -265,15 +276,17 @@ exports.sourceNodes = async({ actions }) => {
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
         }
     };
-
+    
     // fetch raw data from the randomuser api
     const fetchRandomRestaurant = () => axios.request(optionsRestaurant);
     // await for results
     const resRestaurant = await fetchRandomRestaurant();
-
+    collectedRestaurants.push(...resRestaurant.data)
+}
+    
 
     // map into these results and create nodes
-    resRestaurant.data.data.map((restaurant, i) => {
+    collectedRestaurants.map((restaurant, i) => {
         // Create your node object
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, raw_ranking, ranking_geo, ranking_geo_id, ranking_position, ranking_category, ranking, rating, is_closed, description, web_url, write_review, category, is_jfy_enabled, phone, website, email, address_obj, hours } = restaurant
 
@@ -375,7 +388,71 @@ exports.createPages = async({ graphql, actions }) => {
     })
 }
 
-
+exports.createPages = async({ actions, graphql }) => {
+    const { data } = await graphql(`{
+        allHotels {
+          nodes {
+            location_id   
+        }
+      `)
+    data.allHotels.nodes.forEach(node => {
+        actions.createPage({
+            path: '/hotels/' + node.location_id,
+            component: path.resolve('./src/templates/hotels.jsx'),
+            context: {
+                location_id: node.location_id
+            }
+        })
+    })
+}
+exports.createPages = async({ actions, graphql }) => {
+    const { data } = await graphql(` {
+        allHotels {
+            nodes {
+              location_id
+              hotel_class
+              checkin(formatString: "")
+              checkout(formatString: "")
+              num_reviews
+              name
+              price
+              ranking
+              timezone
+              photo {
+                images {
+                  large {
+                    url
+                  }
+                  medium {
+                    width
+                    url
+                    height
+                  }
+                  original {
+                    width
+                    url
+                    height
+                  }
+                  small {
+                    width
+                    url
+                    height
+                  }
+                }
+              }
+            }
+          }
+        }`)
+    data.allHotels.nodes.forEach(node => {
+        actions.createPage({
+            path: '/hotel/' + node.location_id,
+            component: path.resolve('./src/templates/hotel.jsx'),
+            context: {
+                hotel: node
+            }
+        })
+    })
+}
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     if (stage === "build-html") {
         actions.setWebpackConfig({
