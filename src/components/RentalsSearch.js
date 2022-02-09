@@ -116,7 +116,7 @@ const RentalsSearch = () => {
 
     return (
         <React.Fragment>
-        {browser.innerWidth > 1024  
+        {isBrowser && window.innerWidth > 1024  
         ?   <div className="rentals-search lg">
                 <h2>Car hire for any kind of trip</h2>
                 <p>Compare deals from the biggest car hire companies</p>
