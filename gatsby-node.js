@@ -11,16 +11,16 @@ const randomDate = (start, end) => {
 exports.sourceNodes = async({ actions }) => {
     const { createNode, createPage } = actions;
 
-    const cities = ['Warsaw', 'Pattaya', 'London', 'New York', 'Berlin', 'Rotterdam', 'Buenos Aires', 'Sydney']
-    var collectedData = []
+    // const cities = ['Warsaw', 'Pattaya', 'London', 'New York', 'Berlin', 'Rotterdam', 'Buenos Aires', 'Sydney']
+    //var collectedData = []
 
-    for(city of cities){
+    //for(city of cities){
     const optionsLocation = {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/locations/search',
         params: {
-            // query: 'pattaya',
-            query: city,
+            query: 'pattaya',
+            // query: city,
             limit: '30',
             offset: '0',
             units: 'km',
@@ -36,7 +36,7 @@ exports.sourceNodes = async({ actions }) => {
     };
     const fetchRandomLocation = () => axios.request(optionsLocation);
     const resLocation = await fetchRandomLocation();
-    collectedData.push(...resLocation.data.data)
+    //collectedData.push(...resLocation.data.data)
     }
 
     // fetch raw data from the randomuser api
@@ -44,8 +44,8 @@ exports.sourceNodes = async({ actions }) => {
 
 
 
-    collectedData.map((location, i) => {
-    // resLocation.data.data.map((location, i) => {
+   // collectedData.map((location, i) => {
+     resLocation.data.data.map((location, i) => {
         // Create your node object
         const { result_type, scope, is_top_result } = location
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, description, category_counts, nearby_attractions, web_url, ancestors, category, subcategory, is_jfy_enabled, nearest_metro_station, geo_description } = location.result_object
@@ -138,15 +138,16 @@ exports.sourceNodes = async({ actions }) => {
         createNode(locationNode);
     });
 
-    let collectedHotels = []
-    for(city of collectedData){
-        const { location_id } = city.result_object
+    //let collectedHotels = []
+    //for(city of collectedData){
+        //const { location_id } = city.result_object
 
         const optionsHotel = {
             method: 'GET',
             url: 'https://travel-advisor.p.rapidapi.com/hotels/list',
             params: {
-            location_id: location_id,
+            location_id: '293919',
+            //location_id: location_id,  
             adults: '1',
             rooms: '1',
             nights: '2',
@@ -167,14 +168,14 @@ exports.sourceNodes = async({ actions }) => {
     const fetchRandomHotel = () => axios.request(optionsHotel);
     // await for results
     const resHotel = await fetchRandomHotel();
-    console.log(...resHotel.data.data)
+//     console.log(...resHotel.data.data)
     // collectedHotels.push(...resHotel.data)
 
 }
 
 
     // map into these results and create nodes
-   collectedHotels.map((hotel, i) => {
+   resHotel.data.data.map((hotel, i) => {
         // Create your node object
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, autobroaden_label, raw_ranking, ranking_geo, ranking_geo_id, ranking_position, ranking_category, ranking, rating, is_closed, price_level, price, hotel_class, hotel_class_attribution, listing_key } = hotel
 
@@ -254,15 +255,16 @@ exports.sourceNodes = async({ actions }) => {
         createNode(hotelNode);
     });
 
-    let collectedRestaurants = []
+//     let collectedRestaurants = []
 
-    for(city of collectedData){
-        const { location_id } = city.result_object
+//     for(city of collectedData){
+//         const { location_id } = city.result_object
         const optionsRestaurant = {
             method: 'GET',
             url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
             params: {
-            location_id: location_id,
+            location_id: '293919',
+//             location_id: location_id,
             restaurant_tagcategory: '10591',
             restaurant_tagcategory_standalone: '10591',
             currency: 'USD',
@@ -281,12 +283,12 @@ exports.sourceNodes = async({ actions }) => {
     const fetchRandomRestaurant = () => axios.request(optionsRestaurant);
     // await for results
     const resRestaurant = await fetchRandomRestaurant();
-    collectedRestaurants.push(...resRestaurant.data)
+//     collectedRestaurants.push(...resRestaurant.data)
 }
     
 
     // map into these results and create nodes
-    collectedRestaurants.map((restaurant, i) => {
+    resRestaurant.data.data.map((restaurant, i) => {
         // Create your node object
         const { location_id, name, latitude, longitude, num_reviews, timezone, location_string, photo, awards, raw_ranking, ranking_geo, ranking_geo_id, ranking_position, ranking_category, ranking, rating, is_closed, description, web_url, write_review, category, is_jfy_enabled, phone, website, email, address_obj, hours } = restaurant
 
