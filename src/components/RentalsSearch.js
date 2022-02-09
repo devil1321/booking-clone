@@ -6,6 +6,9 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 const RentalsSearch = () => {
 
+    const [browser,setBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState(false)
+
     const [isDriverAgeShow, setIsDriverAgeShow] = useState(false)
     const [isDroppOffShow,setIsDropOffShow] = useState(false)
     
@@ -88,6 +91,12 @@ const RentalsSearch = () => {
     }
     
     useEffect(()=>{
+        if(typeof window !== undefined){
+            if(!isBrowser){
+                setBrowser(window)
+                setIsBrowser(true)
+            }
+        }
         setAges(26,45)
         setTimeArrs()
         const pickup = document.querySelector('.pickup')
@@ -105,11 +114,11 @@ const RentalsSearch = () => {
             pickup.style.borderRight = "4px solid orange"
         }
     }
-    },[isDriverAgeShow,isDroppOffShow])
+    },[isDriverAgeShow,isDroppOffShow,browser])
 
     return (
         <React.Fragment>
-        {window.innerWidth > 1024  
+        {browser.innerWidth > 1024  
         ?   <div className="rentals-search lg">
                 <h2>Car hire for any kind of trip</h2>
                 <p>Compare deals from the biggest car hire companies</p>

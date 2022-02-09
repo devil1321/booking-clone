@@ -8,15 +8,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 const NavSlider = () => {
-
     const stays = useRef()
     const flights = useRef()
     const rentals = useRef()
     const attractions = useRef()
     const airports = useRef()
+    
+    const [browser,setBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState(false)
+
 
     const setActive = () =>{
-        const location = window.location.pathname
+        const location = browser.location.pathname
         const sliderItems = document.querySelectorAll('slider__item')
         sliderItems.forEach(item=>{
             item.classList.remove('active')
@@ -43,15 +46,21 @@ const NavSlider = () => {
     }
     
     useEffect(()=>{
+        if(typeof window !== undefined){
+            if(!isBrowser){
+                setBrowser(window)
+                setIsBrowser(true)
+            }
+        }
         setActive()
-    })
+    },[browser])
     return (
         <div className="slider">
             <Swiper
       // install Swiper modules
             modules={[Scrollbar]}
-                spaceBetween={window.innerWidth < 768 ? 25 : 0}
-                slidesPerView={window.innerWidth < 738 ? 3 : 5}
+                spaceBetween={browser.innerWidth < 768 ? 25 : 0}
+                slidesPerView={browser.innerWidth < 738 ? 3 : 5}
                 scrollbar={{ draggable: true }}
             >
              <SwiperSlide>

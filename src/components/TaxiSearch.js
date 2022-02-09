@@ -11,7 +11,8 @@ const TaxiSearch = () => {
 
     const [isSet,setIsSet] = useState(false)
 
-
+    const [browser,setBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState(false)
     
     const [isListShow,setIsListShow] = useState(false)
     const [isTimeShow,setIsTimeShow] = useState(false)
@@ -70,15 +71,21 @@ const TaxiSearch = () => {
     }
 
     useEffect(()=>{
+        if(typeof window !== undefined){
+            if(!isBrowser){
+                setBrowser(window)
+                setIsBrowser(true)
+            }
+        }
         if(!isSet){
             setOptionsArr()
             setTimeArrs()
         }
-    },[isSet])
+    },[isSet,browser])
 
     return (
         <div className="taxi__search">
-            {window.innerWidth > 768 
+            {browser.innerWidth > 768 
                 ? <form action="" className="taxi__form">
                 <div className="taxi__radio-group">
                     <div className="taxi__radio-field">

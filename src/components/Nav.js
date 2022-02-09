@@ -6,12 +6,20 @@ const Nav = () => {
     const [isSmall,setIsSmall] = useState(null)
     const [size,setSize] = useState(null)
     const [isMenu,setIsMenu] = useState(false)
+    const [browser,setBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState('')
     useEffect(()=>{
+        if(typeof window !== undefined){
+            if(!isBrowser){
+                setBrowser(window)
+                setIsBrowser(true)
+            }
+        }
         if(size === null){
             const body = document.querySelector('body')
             setSize(body.clientWidth)
         }
-        window.addEventListener("resize", () => {
+        browser.addEventListener("resize", () => {
             setSize(window.screen.width);
         })
         if(size > 768){
@@ -20,7 +28,7 @@ const Nav = () => {
             setIsSmall(true)
         }   
         return () => {
-            window.removeEventListener("resize", () => {});
+            browser.removeEventListener("resize", () => {});
         };
     },[isSmall,size])
 

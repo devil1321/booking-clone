@@ -1,9 +1,19 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const AttractionsSearch = () => {
     const [isSearch,setIsSearch] = useState(false)
+    const [browser,setBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState(false)
+    useEffect(()=>{
+        if(typeof window !== undefined){
+            if(!isBrowser){
+                setBrowser(window)
+                setIsBrowser(true)
+            }
+        }
+    },[browser])
     return (
         <div className="attractions__search-wrapper">
             <div className="attractions__search">
@@ -12,8 +22,8 @@ const AttractionsSearch = () => {
                 <form action="" className="attractions__form">
                     <div className="attractions__field">
                         <FontAwesomeIcon icon={faSearch} />
-                        {window.innerWidth > 767 ? <input type="text" placeholder="Destinations, museums, tours..." /> : null}
-                        {window.innerWidth < 768 ? <input onClick={() => setIsSearch(true)} type="text" placeholder="Destinations, museums, tours..." /> : null}
+                        {browser.innerWidth > 767 ? <input type="text" placeholder="Destinations, museums, tours..." /> : null}
+                        {browser.innerWidth < 768 ? <input onClick={() => setIsSearch(true)} type="text" placeholder="Destinations, museums, tours..." /> : null}
                         <button type="submit" className="attractions__submit">Search</button>
                     </div>
                     {isSearch &&
