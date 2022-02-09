@@ -13,7 +13,7 @@ import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 const Taxi = () => {
-
+    const [browser,setBrowser] = useState('')
     const acorriodionNodes = [
       {
         node:{
@@ -74,6 +74,9 @@ const Taxi = () => {
         if (isMobile) {
                 handleTab(false,'three')
             }
+        }
+        if(typeof window !== "undefined"){
+            setBrowser(window)
         }
     },[])
     return (
@@ -158,7 +161,7 @@ const Taxi = () => {
                         <li onClick={(e)=>{handleTab(e)}} id="three">All taxis</li>
                     </ul>
                 </div>
-                {window.innerWidth > 1024 && 
+                {browser.innerWidth > 1024 && 
                 <div className="taxi__tabs-content" >
                     <div className="taxi__tab one" >
                       <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
@@ -181,12 +184,12 @@ const Taxi = () => {
                         </div>
                     </div>
                 </div>}
-                {window.innerWidth <=1024 && 
+                {browser.innerWidth <=1024 && 
                     <React.Fragment>
                           <Swiper
                                 modules={[Pagination]}
                                 spaceBetween={50} 
-                                slidesPerView={window.innerWidth < 735 ? 1 : 2}
+                                slidesPerView={browser.innerWidth < 735 ? 1 : 2}
                                 pagination={{ clickable: true }}                          
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}>
