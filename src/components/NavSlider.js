@@ -14,12 +14,14 @@ const NavSlider = () => {
     const attractions = useRef()
     const airports = useRef()
     
-    const [browser,setBrowser] = useState('')
     const [isBrowser,setIsBrowser] = useState(false)
 
 
     const setActive = () =>{
-        const location = browser.location.pathname
+        let location;
+        if(isBrowser){
+             location = window.location.pathname
+        }
         const sliderItems = document.querySelectorAll('slider__item')
         sliderItems.forEach(item=>{
             item.classList.remove('active')
@@ -48,19 +50,18 @@ const NavSlider = () => {
     useEffect(()=>{
         if(typeof window !== undefined){
             if(!isBrowser){
-                setBrowser(window)
                 setIsBrowser(true)
             }
         }
         setActive()
-    },[browser])
+    },[isBrowser])
     return (
         <div className="slider">
             <Swiper
       // install Swiper modules
             modules={[Scrollbar]}
-                spaceBetween={browser.innerWidth < 768 ? 25 : 0}
-                slidesPerView={browser.innerWidth < 738 ? 3 : 5}
+                spaceBetween={isBrowser && window.innerWidth < 768 ? 25 : 0}
+                slidesPerView={isBrowser && window.innerWidth < 738 ? 3 : 5}
                 scrollbar={{ draggable: true }}
             >
              <SwiperSlide>

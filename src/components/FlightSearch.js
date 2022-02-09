@@ -31,7 +31,6 @@ const FlightSearch = () => {
       }
     }
   `)
-    const [browser,setBrowser] = useState('')
     const [isBrowser,setIsBrowser] = useState(false)
 
     const [isEconomyOpen, setIsEconomyOpen] = useState(false)
@@ -112,7 +111,7 @@ const FlightSearch = () => {
     }
 
     const handleStyles = () =>{
-        if(browser.innerWidth > 767){
+        if(isBrowser && window.innerWidth > 767){
         const mainInner = document.querySelectorAll('.flight-s__main-inner')
         const inputs = document.querySelectorAll('.flight-s__input')
             const date_1 = mainInner[0].querySelector('.flight-s__input.date')
@@ -170,16 +169,15 @@ const FlightSearch = () => {
         }
         if(typeof window !== undefined){
             if(!isBrowser){
-                setBrowser(window)
                 setIsBrowser(true)
             }
         }
         handleStyles()
-    },[searchPlaces,searchListFrom,formData,isMultiple,browser])
+    },[searchPlaces,searchListFrom,formData,isMultiple,isBrowser])
     
     return (
         <div className="flight-s">
-            {browser.innerWidth > 767 ? <form action="" className="flight-s__form" onSubmit = {(e)=>{handleSubmit(e)}}>
+            {isBrowser && window.innerWidth > 767 ? <form action="" className="flight-s__form" onSubmit = {(e)=>{handleSubmit(e)}}>
                 <div className="flight-s__header">
                     <div className="flight-s__radio">
                         <input type="radio" onClick={()=>{setIsMultiple(false)}} name="choice" value="round-trip" id="" />

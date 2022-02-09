@@ -6,7 +6,6 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 const RentalsSearch = () => {
 
-    const [browser,setBrowser] = useState('')
     const [isBrowser,setIsBrowser] = useState(false)
 
     const [isDriverAgeShow, setIsDriverAgeShow] = useState(false)
@@ -93,7 +92,6 @@ const RentalsSearch = () => {
     useEffect(()=>{
         if(typeof window !== undefined){
             if(!isBrowser){
-                setBrowser(window)
                 setIsBrowser(true)
             }
         }
@@ -114,7 +112,7 @@ const RentalsSearch = () => {
             pickup.style.borderRight = "4px solid orange"
         }
     }
-    },[isDriverAgeShow,isDroppOffShow,browser])
+    },[isDriverAgeShow,isDroppOffShow,isBrowser])
 
     return (
         <React.Fragment>

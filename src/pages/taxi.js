@@ -13,7 +13,6 @@ import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 const Taxi = () => {
-    const [browser,setBrowser] = useState('')
     const [isBrowser,setIsBrowser] = useState(false)
 
     const acorriodionNodes = [
@@ -73,18 +72,17 @@ const Taxi = () => {
     useEffect(()=>{
         if(typeof window !== undefined){
             if(!isBrowser){
-                setBrowser(window)
                 setIsBrowser(true)
             }
         }
-        if(browser.innerWidth < 1366){
+        if(isBrowser && window.innerWidth < 1366){
             var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {
                 handleTab(false,'three')
             }
         }
      
-    },[browser])
+    },[isBrowser])
     return (
         <Layout className="taxi">
             <Accordion isFunctional={true} heading="Protecting you during COVID-19" text="Your safety matters. From July 2020, we’re asking all customers to wear a face covering when travelling with us. If you don’t wear a face covering, your driver may not be able to start your journey. Where Coronavirus may affect your plans, here’s what you need to know about booking with us at this time."/>
@@ -167,7 +165,7 @@ const Taxi = () => {
                         <li onClick={(e)=>{handleTab(e)}} id="three">All taxis</li>
                     </ul>
                 </div>
-                {browser.innerWidth > 1024 && 
+                {isBrowser && window.innerWidth > 1024 && 
                 <div className="taxi__tabs-content" >
                     <div className="taxi__tab one" >
                       <Tab isWide={true} title="Standard" subtitle="Skoda Octavia or similar" passagers={3} bags={2}/>
@@ -190,12 +188,12 @@ const Taxi = () => {
                         </div>
                     </div>
                 </div>}
-                {browser.innerWidth <=1024 && 
+                {isBrowser && window.innerWidth <=1024 && 
                     <React.Fragment>
                           <Swiper
                                 modules={[Pagination]}
                                 spaceBetween={50} 
-                                slidesPerView={browser.innerWidth < 735 ? 1 : 2}
+                                slidesPerView={isBrowser && window.innerWidth < 735 ? 1 : 2}
                                 pagination={{ clickable: true }}                          
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}>

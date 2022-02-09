@@ -6,12 +6,9 @@ const Nav = () => {
     const [isSmall,setIsSmall] = useState(null)
     const [size,setSize] = useState(null)
     const [isMenu,setIsMenu] = useState(false)
-    const [browser,setBrowser] = useState('')
-    const [isBrowser,setIsBrowser] = useState('')
+    const [isBrowser,setIsBrowser] = useState(false)
     useEffect(()=>{
         if(typeof window !== undefined){
-            if(!isBrowser){
-                setBrowser(window)
                 setIsBrowser(true)
             }
         }
@@ -19,18 +16,20 @@ const Nav = () => {
             const body = document.querySelector('body')
             setSize(body.clientWidth)
         }
-        browser.addEventListener("resize", () => {
-            setSize(window.screen.width);
-        })
+        if(isBrowser){
+            window.addEventListener("resize", () => {
+                setSize(window.screen.width);
+            })
+        }
         if(size > 768){
             setIsSmall(false)
         }else if(size < 768){
             setIsSmall(true)
         }   
         return () => {
-            browser.removeEventListener("resize", () => {});
+            window.removeEventListener("resize", () => {});
         };
-    },[isSmall,size])
+    },[isSmall,isBrowser,size])
 
     return (
         <div className="nav">
