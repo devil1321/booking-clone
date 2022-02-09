@@ -9,7 +9,7 @@ const Nav = () => {
     const [isBrowser,setIsBrowser] = useState(false)
     useEffect(()=>{
         if(typeof window !== undefined){
-            if(!isBrowser)
+            if(!isBrowser){
                 setIsBrowser(true)
             }
         }
