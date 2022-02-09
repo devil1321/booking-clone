@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useCallback} from 'react'
+import React,{useState,useEffect} from 'react'
 import NavSlider from './NavSlider'
 import Link from 'gatsby-link'
 const Nav = () => {
