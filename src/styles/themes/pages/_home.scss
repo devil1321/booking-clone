@@ -24,7 +24,7 @@
         }
         @include createFlex(row, flex-start, flex-start, null);
         .grid-1 {
-            width: 100%;
+            width: 99%;
             @include breakpoint-down(medium) {
                 img {
                     width: 200%;
