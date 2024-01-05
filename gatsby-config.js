@@ -30,12 +30,7 @@ module.exports = {
             },
         },
         `gatsby-plugin-gatsby-cloud`,
-        {
-            resolve: `gatsby-plugin-sass`,
-            options: {
-                implementation: require("node-sass"),
-            },
-        },
+        `gatsby-plugin-sass`,
         {
             resolve: `gatsby-plugin-react-redux`,
             options: {
